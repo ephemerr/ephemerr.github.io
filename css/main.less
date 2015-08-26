@@ -1,0 +1,259 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+    font-family: Rupster Script; /* Гарнитура шрифта */
+    src: url("../font/Rupster Script.ttf"); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+    font-family: Droid Sans; /* Гарнитура шрифта */
+    src: url("../font/droidsans.ttf"); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+    font-family: Ubuntu; /* Гарнитура шрифта */
+    src: url("../font/ubuntu.ttf"); /* Путь к файлу со шрифтом */
+}
+
+body {
+	width: 950px;	
+	font: 14px Ubuntu, Helvetica, sans-serif;
+	background-color: #bebefe;	
+	margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
+	color: #000;
+	overflow: scroll;
+}
+
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 18px;
+	padding-left: 18px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+}
+
+h1 {
+	margin: 0 0 10px 0;
+	font-size: 24px;
+}
+
+h2 {
+	margin: 0 0 10px 0;
+	font-size: 20px;
+}
+
+h3 {
+	margin: 0 0 8px 0;
+	font-size: 18px;
+}
+
+h4 {
+	margin: 0 0 6px 0;
+	font-size: 16px;
+}
+
+h5 {
+	margin: 0 0 18px 0;
+	font-size: 15px;
+}
+
+p {
+	margin: 0 0 8px 0;
+	font-weight: normal;
+	color: #000;
+	line-height: 1.4;
+}
+
+strong {
+	font-weight:bold;
+}
+
+em {
+	font-style:italic;
+}
+
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+	border: none;
+}
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link {
+	color: #0022bb;
+	text-decoration: underline; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
+}
+a:visited {
+/*	color: #800080; */
+	color: #0022bb;
+	text-decoration: underline;
+}
+a:hover {
+	color: #0022bb;
+}
+
+a:active {
+	color: #0022bb;
+}
+
+a.more {
+	float: right;
+	font-size: 12px;
+	color: MidnightBlue;
+} 
+
+/* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
+header {
+	background: linear-gradient(to top, #fefcea, #bebefe);
+	box-shadow: 0 10px 5px 2px rgba(0,0,0,0.5);
+}
+
+.site-name {
+	font-size: 36px;
+	font-family: 'Rupster Script', sans-serif;
+	color: #404040;
+	font-weight: normal;
+	padding-top: 20px;
+}
+
+/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
+#nav {
+	padding: 30px;
+	height: 46px;	
+	font-size: 26px;
+	font-family: Rupster Script, Arial, Helvetica, sans-serif;
+	color: DimGray;
+	text-align: center;
+	-border: 1px solid Blue;	
+}
+
+#nav li {
+    position: relative; 
+	-border: 1px solid green;
+	display: inline-block;
+/*	white-space: pre; */
+}
+
+#nav a.current, #nav a.current:visited {
+	color: #000;
+	border: 0;
+	text-decoration : none;
+	text-align: center;
+	font-weight: bold;
+	letter-spacing: normal;
+}
+
+#nav a, #nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
+	float: left;
+	border: none;
+	text-decoration : none;
+	text-align: center;
+	color: DimGray;
+	letter-spacing: 0px;
+	width: 180px;
+}
+
+#nav a:hover, #nav a:active, #nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+	color: MidnightBlue;
+	text-decoration: none;
+}
+
+#nav li ul {
+	font-size: 22px;
+	-font-family: Droid Sans;
+	-font-style: italic;
+    position: absolute; 
+	top: 45px;
+	border: 0px solid red;
+    display: none; /* Скрываем подменю */
+	background: radial-gradient(ellipse, 	DimGrey, DarkGrey);
+	border-radius: 5px; /* Радиус скругления */
+	border: 1px solid black; /* Радиус скругления */
+	width: auto;
+}
+
+#nav li ul a {
+	padding: 2px 0 0 20px ;
+	text-align: left;
+	color: white;	
+	border-bottom: 1px solid black;
+}
+
+#nav li:hover ul { 
+    display: block; /* При выделении пункта курсором мыши отображается подменю */	
+}
+
+#nav li:hover ul li{ 
+    display: inline; /* При выделении пункта курсором мыши отображается подменю */	
+	background: white;
+}
+
+
+/* ~~ This is the layout information. ~~ 
+1) Padding is only placed on the top and/or bottom of the div. The elements within this div have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the div itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the div and place a second div within it with no width and the padding necessary for your design.
+*/
+
+/* ~~ this fixed width container surrounds the other divs ~~ */
+.container {	
+	border: 2px solid #ebebeb;
+	left: 0px;
+	width: 90%;
+	background-color: Snow;	
+	margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
+	border-radius: 3px; /* Радиус скругления */
+}
+
+.container h1 {
+	background-color: #ebebeb;
+	background: linear-gradient(to top, #fefcea, Moccasin);
+	color: DimGrey;	
+	font-family: 'Rupster Script', sans-serif;
+	font-weight: normal;
+}
+
+.content {
+	box-shadow: 0 10px 5px 2px rgba(0,0,0,0.5);
+	background: white;
+	padding: 0 0 50px 0;
+	border-top: 2px solid white;	
+}
+
+#news {
+	width: 42%;
+	display: inline-block;
+	-margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
+	margin: 30px 30px 30px 50px;
+}
+
+.newshead {
+	line-height: 1.2em;
+	padding: 2px 0px 0px 20px;
+	font-size: 14px;
+	display: inline;
+	letter-spacing: .1em;
+}
+
+.newsdate {
+	font-size: 12px;
+	display: inline;
+	font-weight: bold;
+}
+
+#studio {
+	width: 42%;
+	float: right;
+	margin-right: 50px;
+}
+
+/* ~~ The footer ~~ */
+footer {
+	background: linear-gradient(to bottom, #fefcea, #bebefe);
+	text-align: center;
+	padding: 10px 0 10px 0;
+}
+
+.dev {
+	vertical-align: top;
+}
