@@ -107,15 +107,17 @@ body {
 	} 
 
 	/* ~~ this fixed width container surrounds the other divs ~~ */
-	.container {	
+	.container {
 		border: 2px solid #ebebeb;
 		left: 0px;
 		width: 90%;
 		-background-color: Snow;	
 		margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
 		border-radius: 3px; /* Радиус скругления */
+		padding: 3px 3px 3px 3px;
 		h1 {
-			-background-color: #ebebeb;
+			text-align: center;
+			background-color: #ebebeb;
 			-background: linear-gradient(to top, #fefcea, black);
 			color: DimGrey;	
 			font-family: 'Rupster Script', sans-serif;
@@ -260,10 +262,8 @@ body {
 			}
 		}
 		#news {
-			width: 42%;
-			display: inline-block;
 			-margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
-			margin: 30px 30px 30px 50px;
+			-margin: 30px 30px 30px 50px;
 			.newshead {
 				line-height: 1.2em;
 				padding: 2px 0px 0px 20px;
@@ -279,9 +279,7 @@ body {
 			}
 		}		
 		#studio {
-			width: 42%;
-			float: right;
-			margin-right: 50px;
+			-margin-right: 50px;
 		}	
 	}
 	/* ~~ The footer ~~ */
