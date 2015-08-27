@@ -17,14 +17,26 @@
 }
 
 body {	
-    min-width: 750px;
-    max-width: 1350px;
-	width: 950px;
-	font: 14px Ubuntu, Helvetica, sans-serif;
+	//@about-color: #bebefe;
+	//@news-color: #FF8A75;
+	//@study-color: #A9FFC6;
+	//@playbill-color: #FFBC75;
+	@about-color: white;
+	@about-fcolor: #565680;
+	@playbill-color: #4C0D09;
+	@playbill-fcolor: white;
+	@news-color: white;
+	@news-fcolor: black;
+	@study-color: #0E4E0E;
+	@study-fcolor: white;
+
+	@font-size: 20px;	
+	font-family: monospace, Georgia, Helvetica, sans-serif;
+	font-size: @font-size;	
 	background-color: #bebefe;	
-	margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
-	color: #000;
+	margin: auto auto auto auto; /* the auto value on the sides, coupled with the width, centers the layout */
 	overflow: scroll;
+	min-width: 800px;
 
 	/* ~~ Element/tag selectors ~~ */
 	ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
@@ -65,8 +77,7 @@ body {
 
 	p {
 		margin: 0 0 8px 0;
-		font-weight: normal;
-		color: #000;
+		font-weight: normal;		
 		line-height: 1.4;
 	}
 
@@ -108,48 +119,67 @@ body {
 
 	/* ~~ this fixed width container surrounds the other divs ~~ */
 	.container {
-		border: 2px solid #ebebeb;
+		display: inline-block;
 		left: 0px;
-		width: 90%;
-		-background-color: Snow;	
-		margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
-		border-radius: 3px; /* Радиус скругления */
-		padding: 3px 3px 3px 3px;
+		max-width: 950px;
+		min-width: 650px;
+		min-height: 250px;
+		vertical-align: center;
+		padding: 50px;
+		text-align: left;		
 		h1 {
 			text-align: center;
-			background-color: #ebebeb;
-			-background: linear-gradient(to top, #fefcea, black);
-			color: DimGrey;	
 			font-family: 'Rupster Script', sans-serif;
 			font-weight: normal;
+			font-size: @font-size*3;
 		}
 	}
-
-	/* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
-	header {
-		background: linear-gradient(to top, #fefcea, #bebefe);
-		box-shadow: 0 10px 5px 2px rgba(0,0,0,0.5);		
-		.site-name {
-			font-size: 36px;
+	
+	header {		
+		//background-image: url("../img/bg1.png");
+		background: #bebefe;
+		//height: 20px;
+		#site-name {
+			display: none;
+			text-align: center;		
+			text-shadow: 1px 1px 2px black, 0 0 1em red;
+			font-size: @font-size*2;
 			font-family: 'Rupster Script', sans-serif;
-			color: #404040;
+			color: #bebefe*1.2;
 			font-weight: normal;
 			padding-top: 20px;
 		}
-	    /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
 		#nav {
+			display: none;
 			padding: 30px;
 			height: 46px;	
 			font-size: 26px;
 			font-family: Rupster Script, Arial, Helvetica, sans-serif;
 			color: DimGray;
 			text-align: center;
-			-border: 1px solid Blue;	
+			-border: 1px solid Blue;
 		 	li {
 			    position: relative; 
 				-border: 1px solid green;
 				display: inline-block;
 			/*	white-space: pre; */
+				ul {
+					font-size: 22px;
+				    position: absolute; 
+					top: 45px;
+					border: 0px solid red;
+				    display: none; /* Скрываем подменю */
+					background: radial-gradient(ellipse, 	DimGrey, DarkGrey);
+					border-radius: 5px; /* Радиус скругления */
+					border: 1px solid black; /* Радиус скругления */
+					width: auto;
+					a {
+						padding: 2px 0 0 20px ;
+						text-align: left;
+						color: white;	
+						border-bottom: 1px solid black;
+					}					
+				}
 			}
 
 			a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */				
@@ -176,27 +206,6 @@ body {
 				text-decoration: none;
 			}
 
-			li {
-				ul {
-					font-size: 22px;
-					-font-family: Droid Sans;
-					-font-style: italic;
-				    position: absolute; 
-					top: 45px;
-					border: 0px solid red;
-				    display: none; /* Скрываем подменю */
-					background: radial-gradient(ellipse, 	DimGrey, DarkGrey);
-					border-radius: 5px; /* Радиус скругления */
-					border: 1px solid black; /* Радиус скругления */
-					width: auto;
-					a {
-						padding: 2px 0 0 20px ;
-						text-align: left;
-						color: white;	
-						border-bottom: 1px solid black;
-					}					
-				}
-			}
 
 			li:hover {
 				ul {
@@ -210,22 +219,42 @@ body {
 		}
 	}
 
+	.morelist {
+		text-align: center;		
+		padding: 30px 0px 0px 0px;
+		li {
+			a {
+				vertical-align: center;				
+			}
+			padding: 0 10px 0 10px;
+			border: 2px solid;
+			border-radius: 20px;
+			min-width: 150px;
+			display: inline-block;
+		}		
+	}
+
 	.content {
-		box-shadow: 0 10px 5px 2px rgba(0,0,0,0.5);
-		background: white;
-		padding: 0 0 50px 0;
-		border-top: 2px solid white;	
+		text-align: center;
+		#about {			
+			background: @about-color;
+			color: @about-fcolor;
+		}
 		#coming {			
+			background: @playbill-color;			
+			color: @playbill-fcolor;			
 			.playbill {
 			    @font-size: 16px;
 				width: "100%";
-			    color: #0e4e0e;
-			    background: #D8E1CA;
+			    //color: #0e4e0e;
+			    //background: #D8E1CA;
 			    text-align: center;
 			    font-family: monospace;
 			    font-size: @font-size;
-			    div {
-			        padding: 0px 10px 0px 10px;
+			    td {
+			    	padding: 10px 0px 10px 0px;
+			    	border-top: 1px solid @playbill-color + #111;
+				    border-bottom: 1px solid @playbill-color + #111;
 			    }
 			    .time_col {
 			        .month {
@@ -239,7 +268,6 @@ body {
 			        }
 			    }
 			    .title_col {
-			        -background: #ffedd0;
 			        .age {
 			            display: none;
 			            float: right;
@@ -251,7 +279,7 @@ body {
 			            font-size: @font-size + 2;
 			        }
 			        .playname {
-			            font-size: @font-size * 1.5;
+			            font-size: @font-size * 2;
 			        }
 			    }
 			    .place_col {        
@@ -262,33 +290,50 @@ body {
 			}
 		}
 		#news {
-			-margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
-			-margin: 30px 30px 30px 50px;
+			background: @news-color;
+			color: @news-fcolor;
 			.newshead {
 				line-height: 1.2em;
-				padding: 2px 0px 0px 20px;
-				font-size: 14px;
+				padding: 2px 0px 0px 20px;				
 				display: inline;
-				letter-spacing: .1em;
+				letter-spacing: .2em;
+				font-family: fantasy;
+				.newsdate {			
+					letter-spacing: normal;	
+					display: inline;
+					font-weight: bold;
+				}
 			}
 
-			.newsdate {
-				font-size: 12px;
-				display: inline;
-				font-weight: bold;
-			}
 		}		
 		#studio {
-			-margin-right: 50px;
+			background: @study-color;			
+			color: @study-fcolor;			
 		}	
 	}
 	/* ~~ The footer ~~ */
 	footer {
-		background: linear-gradient(to bottom, #fefcea, #bebefe);
-		text-align: center;
-		padding: 10px 0 10px 0;
-		.dev {
-			vertical-align: top;
+		font-size: @font-size - 3;
+		height: 160px;
+		background: #0B1E25;
+		//linear-gradient(to bottom, #fefcea, #bebefe);
+		padding: 60px 10px 30px 10px;
+		#map {
+			text-align: center;
+			color: DimGray;
+		 	li {
+		 		text-align: left;
+		 		width: 200px;
+			    position: relative; 
+				display: inline-block;
+				ul {
+					font-size: @font-size - 4;
+					text-align: left;
+					position: absolute; 
+					top: 30px;
+				}
+			/*	white-space: pre; */
+			}
 		}
 	}
 }
