@@ -6,34 +6,24 @@
     src: url("../font/Rupster Script.ttf"); /* Путь к файлу со шрифтом */
 }
 
-@font-face {
-    font-family: Droid Sans; /* Гарнитура шрифта */
-    src: url("../font/droidsans.ttf"); /* Путь к файлу со шрифтом */
-}
-
-@font-face {
-    font-family: Ubuntu; /* Гарнитура шрифта */
-    src: url("../font/ubuntu.ttf"); /* Путь к файлу со шрифтом */
-}
-
 body {	
 	@color-main: #bebefe;
 	@color-main-dim: #8F8FAD;
 	@color-main-condensed: #26268D;
 	@color-main-bleak: #D3D3FF;
-	@color-main-white: #E3E3FF;
+	@color-main-white: #E3E3FF+#111;
 
 	@color-a: #D7B9FE;
 	@color-a-dim: #9B8DAD;
 	@color-a-condensed: #52258D;
 	@color-a-bleak: #E4D0FF;
-	@color-a-white: #EEE1FF;
+	@color-a-white: #EEE1FF+#111;
 
 	@color-b: #B7DFFE;
 	@color-b-dim: #8C9FAD;
 	@color-b-condensed: #25608D;
 	@color-b-bleak: #CFEAFF;
-	@color-b-white: #E1F2FF;
+	@color-b-white: #E1F2FF+#111;
 
 	@color-c: #FFECB3;
 	@color-c-dim: #AEA58B;
@@ -44,17 +34,15 @@ body {
 	
 	@header-color: @color-main-dim;
 	@h1-color: @color-b-dim;
-	@playbill-color: white;
-	@playbill-fcolor: @color-c-dim;
 	@footer-fcolor: @color-main-dim;
 	@footer-color: @color-main;
 
-	@about-color: white;
-	@about-fcolor: #565680;
-	@news-color: white;
+	@playbill-color: @color-c-white;
+	@playbill-fcolor: @color-c-dim;
+	@news-color: @color-b-white;
 	@news-fcolor: black;
-	@study-color: #0E4E0E;
-	@study-fcolor: white;
+	@study-color: @color-main-white;
+	@study-fcolor: black;
 
 	@font-size: 16px;	
 	font-family: monospace;
@@ -220,17 +208,18 @@ body {
 			display: none;
 			text-align: center;
 		}	
-		#coming {			
+		#coming {
+			background: @playbill-color;			
+		    color: @playbill-fcolor;
 			.playbill {
+				padding: 0 30px 0 30px;
 				width: "100%";
-			    color: @playbill-fcolor;
-			    background: @playbill-color;
 			    text-align: center;
 			    font-size: @font-size;
 			    td {
 			    	padding: 10px 0px 10px 0px;
-			    	border-top: 1px solid @playbill-color - #111;
-				    border-bottom: 1px solid @playbill-color - #111;
+			    	border-top: 1px solid @playbill-color - #222;
+				    border-bottom: 1px solid @playbill-color - #222;
 			    }
 			    .time_col {
 			        .month {
@@ -268,6 +257,8 @@ body {
 			}
 		}
 		#news {
+			background:  @news-color;
+			color: @news-fcolor;
 			-margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
 			-margin: 30px 30px 30px 50px;
 			.newshead {
@@ -283,12 +274,13 @@ body {
 				font-weight: bold;
 			}
 		}		
-		#studio {
+		#studio {			
+			background: @study-color;
+			color: @study-fcolor;
 			img {
 				float: left;
 				width: 30%;
-				margin: 0 30px 0 30px; 
-
+				margin: 0 30px 0 30px; 				
 			}
 			p {
 				display: block;
