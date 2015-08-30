@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+%html{:lang => "ru"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "театр, студия, театральная студия, актерское мастерство, актерское мастерство спб, курсы актерского мастерства, школа актерского мастерства, уроки актерского мастерства, школа актерского мастерства в спб, студия актерского мастерства, театральные курсы, спб театральная студия, театральные студии в санкт петербурге, актерское мастерство для взрослых, кружок актерского мастерства, театральные курсы для взрослых спб, театральные кружки, актерское мастерство обучение, обучение актерскому мастерству, курсы театрального искусства, курсы актерского мастерства петербург, занятия по актерскому мастерству", :name => "keywords"}
+    %meta{:content => "2015 Театр Рассказа", :name => "copyright"}
+    %title Театр Рассказа
+    %link{:href => "/css/index.less", :rel => "stylesheet", :type => "text/less"}
+    %script{:src => "/js/less.js"}
+  %body
+    %header{:align => "center"}
+      #site-name{:align => "center"}
+        %a{:href => "/index.html"} Театр Рассказа	
+      #nav
+        %ul
+          %li
+            %a{:href => "/html/theatre.html"} О театре
+          %li
+            %a{:href => "/html/plays.html"} Спектакли
+          %li
+            %a{:href => "/html/study.html"} Студия
+          %li
+            %a{:href => "/html/contact.html"} Контакты
+    .content= content
+    %footer
+      #map
+        %ul
+          %li
+            %a О театре
+            %ul
+              %li
+                %a История
+              %li
+                %a Люди
+              %li
+                %a Друзья
+          %li
+            %a Спектакли
+            %ul
+              %li
+                %a Афиша
+              %li
+                %a Репертуар
+              %li
+                %a Архив
+          %li
+            %a Студия
+            %ul
+              %li
+                %a Курсы
+              %li
+                %a Расписание
+              %li
+                %a Преподаватели
+              %li
+                %a Методики
+          %li
+            %a Контакты
+            %ul
+              %li
+                %a Как нас найти
+              %li
+                %a Связаться
+              %li
+                %a Гостевая книга
+              %li
+                %a Мы в сети
+      #social
+        %a#vklink{:href => "http://vk.com/theatrestory"}
+          %img{:src => "/img/vk.png"}
+        %a#ytlink
+          %img{:src => "/img/yt.png"}
