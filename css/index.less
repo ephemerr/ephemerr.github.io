@@ -47,7 +47,7 @@ body {
 	@font-size: 16px;	
 	font-family: monospace;
 	font-size: @font-size;	
-	min-width: 750px;
+	min-width: 250px;
     max-width: 1350px;
 	width: 950px;
 	background-color: #bebefe;	
@@ -74,7 +74,7 @@ body {
 
 	a {
 		text-decoration: none;
-		color: inherit;
+		color: @color-main-condensed;
 		img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
 			border: none;
 		}
@@ -82,9 +82,12 @@ body {
 	}
 	a.more {
 		float: right;
-		font-size: 12px;
-		color: MidnightBlue;
+		font-size: @font-size -1px;
 	}
+	p.gohome {
+		text-align: center;
+		font-size: @font-size -3px;
+	}	
 	/* ~~ this fixed width container surrounds the other divs ~~ */
 	.container {
 		left: 0px;
@@ -104,7 +107,7 @@ body {
 		}
 		//border: 2px @color-b-white solid;
 	}
-	.err404 {			
+	.err404 {
 		color: @color-main-dim;
 		background: @color-main-white;
 		font-size: 40px;
@@ -114,9 +117,11 @@ body {
 
 	/* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
 	header {
+		text-align: center;
 		background: linear-gradient(to top, #fefcea, @color-main);
 		color: @header-color;
 		#site-name {
+			a { color: @color-main-dim; }
 			font-size: @font-size*3;
 			font-family: 'Rupster Script', sans-serif;			
 			font-weight: normal;
@@ -132,13 +137,13 @@ body {
 			-border: 1px solid Blue;	
 
 			a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */				
-				float: left;
 				border: none;
 				text-decoration : none;
 				text-align: center;
 				color: @header-color;
 				letter-spacing: 0px;
-				width: 180px;
+				width: auto;
+				padding: 0px 20px 0px 20px;				
 				.current {
 					color: #000;
 					border: 0;
@@ -147,49 +152,15 @@ body {
 					font-weight: bold;
 					letter-spacing: normal;
 				}
-
+				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+					color: @color-main-condensed;
+				}
 			}
-
-			a:hover, a:active, a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-				color: MidnightBlue;
-				text-decoration: none;
-			}
-
-			li {
-			    position: relative; 
+			li {			    
 				-border: 1px solid green;
 				display: inline-block;
-			/*	white-space: pre; */
-				ul {
-					font-size: 22px;
-					-font-family: Droid Sans;
-					-font-style: italic;
-				    position: absolute; 
-					top: 45px;
-					border: 0px solid red;
-				    display: none; /* Скрываем подменю */
-					background: radial-gradient(ellipse, 	DimGrey, DarkGrey);
-					border-radius: 5px; /* Радиус скругления */
-					border: 1px solid black; /* Радиус скругления */
-					width: auto;
-					a {
-						padding: 2px 0 0 20px ;
-						text-align: left;
-						color: white;	
-						border-bottom: 1px solid black;
-					}					
-				}
 			}
 
-			li:hover {
-				ul {
-			    	-display: block; /* При выделении пункта курсором мыши отображается подменю */	
-			    	li { 
-					    display: inline; /* При выделении пункта курсором мыши отображается подменю */	
-						background: white;
-					}
-				}
-			}
 		}
 	}
 
