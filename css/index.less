@@ -89,18 +89,27 @@ body {
 	.container {
 		left: 0px;
 		width: 90%;
-		height: 200px;
+		min-height: 200px;
 		margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */		
 		padding: 3px 3px 30px 3px;
-		h1 {
-			-text-align: center;			
-			-background: linear-gradient(to top, #fefcea, black);
+		text-align: center;			
+		h1 {			
+			text-align: left;			
 			color: @h1-color;	
-			-font-family: 'Rupster Script', sans-serif;
-			font-weight: normal;
+ 			font-weight: normal;
 			font-size: @font-size+6;
 		}
+		p {
+			text-align: left;						
+		}
 		//border: 2px @color-b-white solid;
+	}
+	.err404 {			
+		color: @color-main-dim;
+		background: @color-main-white;
+		font-size: 40px;
+		text-align: center;
+		font-family: fantasy;
 	}
 
 	/* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
@@ -241,6 +250,7 @@ body {
 			}
 		}
 		#news {
+			text-align: left;						
 			background:  @news-color;
 			color: @news-fcolor;
 			-margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
