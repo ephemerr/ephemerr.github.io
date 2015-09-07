@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+%html{:lang => "ru"}
+  %head
+    = elem("head")
+    %link{:href => "/css/theatre.less", :rel => "stylesheet", :type => "text/less"}
+    %script{:src => "/js/less.js"}
+  %body
+ 	%header{:align => "center"}= elem("header")
+	.content
+	  .container
+	    .we
+	      %p
+	        «Театр рассказа» – это социальный проект по созданию нового театрального жанра - жанра театра рассказа, а также разработки новой системы театральной подготовки, обеспечивающей артиста фундаментальными навыками восприятия, взаимодействия и рассказа.
+	      %p
+	        Мы стремимся к решению обобщенной задачи: воспитание артиста и воспитание человека. Для нас театр - это школа жизни человека и общества.
+	    .links
+	      %ul
+	        %li
+	          %a{:href => "/html/hist.html"} История
+	        %li
+	          %a{:href => "/html/genre.html"} Наш жанр
+	        %li
+	          %a{:href => "/html/rucov.html"} Руководитель	          
+ 	%footer= elem("footer")

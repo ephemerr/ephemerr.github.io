@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+%html{:lang => "ru"}
+  %head
+    = elem("head")
+    %link{:href => "/css/contact.less", :rel => "stylesheet", :type => "text/less"}
+    %script{:src => "/js/less.js"}
+  %body
+ 	%header{:align => "center"}= elem("header")
+  .content
+  .content
+    #addr_info.container
+      %div Дом Писателя,
+      %div ул. Звенигородская, д.22
+      %div (м. «Звенигородская»)
+      %p
+        %div
+          email:
+          %a{:href => "mailto:polilog@yandex.ru"} polilog@yandex.ru
+        %p
+          %div Телефон: +79523661866
+          %img.addresmap{:src => "/img/dompis_map.jpg"}/
+ 	%footer= elem("footer")

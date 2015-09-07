@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+%html{:lang => "ru"}
+  %head
+    = elem("head")
+    %link{:href => "/css/index.less", :rel => "stylesheet", :type => "text/less"}
+    %script{:src => "/js/less.js"}
+  %body
+ 	%header{:align => "center"}= elem("header")
+  .content
+    #coming.container
+      %h1 Скоро
+      %table.playbill{:border => "0", :cellspacing => "0", "text-align" => "center", :width => "100%"}
+        %tr
+          %td.time_col
+            .month Сентябрь
+            .day 13
+            .time воскресенье 15:00
+          %td.title_col
+            .age 18+
+            .about Лариса Ратич
+            .playname Спать пора
+          %td.place_col
+            .station м. Новочеркасская
+            .place КДЦ Красногвардейский
+            .addr пр. Шаумяна, д 22
+    #studio.container
+      %h1 Набор в студию
+      %a{:href => "/html/study.html"}
+      %p Идет набор в студию на учебный год 15/16. Всех, кто любит литературу и театр, всех, кто хочет открыть в себе новые возможности. Или просто хочет познакомиться!
+      %a.more{:href => "/html/study.html"} Читать дальше...
+    #news.container
+      %h1 Новости
+      .newshead
+        .newsdate 01.08.2015
+        Интенсив актерского мастерства
+      %p В августе месяце мы проводим интенсивный курс актерского мастерства. Ведет руководитель театра Игорь Сергеевич Иванов.
+      %a.more{:href => ""} Читать дальше...
+ 	%footer= elem("footer")
