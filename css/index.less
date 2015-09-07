@@ -38,7 +38,7 @@ body {
 	@footer-color: @color-main;
 
 	@playbill-color: white;
-	@playbill-fcolor: @color-c-dim;
+	@playbill-fcolor: @color-main-dim;
 	@news-color: white;
 	@news-fcolor: black;
 	@study-color: white;
@@ -47,9 +47,8 @@ body {
 	@font-size: 16px;	
 	font-family: monospace;
 	font-size: @font-size;	
-	min-width: 250px;
-    max-width: 1350px;
-	width: 950px;
+	min-width: 32em;
+    max-width: 950px;	
 	background-color: #bebefe;	
 	margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
 	color: #000;
@@ -62,6 +61,7 @@ body {
 	}
 
 	h1, h2, h3, h4, h5, h6, p {
+			color: @h1-color;
 		margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
 		padding-right: 18px;
 		padding-left: 18px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
@@ -94,15 +94,20 @@ body {
 		width: 90%;
 		min-height: 200px;
 		margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */		
-		padding: 3px 3px 30px 3px;
+		padding: 1px 1px 30px 1px;
+		-border: 2px solid @color-main;
+		-border-radius: 3px; /* Радиус скругления */
+		-box-shadow: 0 0 10px @color-main;
 		h1 {			
 			text-align: left;			
-			color: @h1-color;	
+			color: @h1-color;
+			background: linear-gradient(to bottom, @color-c-bleak, white);
  			font-weight: normal;
 			font-size: @font-size+6;
 		}
 		p {
 			text-align: left;						
+			text-indent: 2em;
 		}
 		//border: 2px @color-b-white solid;
 	}
@@ -112,6 +117,16 @@ body {
 		font-size: 40px;
 		text-align: center;
 		font-family: fantasy;
+	}
+	.links {
+		text-align: center;
+		ul {
+			padding: 1em;
+			li {
+				display: inline-block;
+				padding: 0 	1em;
+			}
+		}
 	}
 
 	/* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
@@ -139,8 +154,7 @@ body {
 				border: none;
 				text-decoration : none;
 				text-align: center;
-				color: @header-color;
-				letter-spacing: 0px;
+				color: @header-color;				
 				width: auto;
 				padding: 0px 20px 0px 20px;				
 				.current {
@@ -155,7 +169,7 @@ body {
 					color: @color-main-condensed;
 				}
 			}
-			li {			    
+			li {
 				-border: 1px solid green;
 				display: inline-block;
 			}
@@ -212,7 +226,7 @@ body {
 			            font-weight: bold;
 			        }
 			    }
-			    .place_col {        
+			    .place_col {
 			        .place {
 			            
 			        }
@@ -237,8 +251,8 @@ body {
 				display: inline;
 				font-weight: bold;
 			}
-		}		
-		#studio {			
+		}
+		#studio {
 			background: @study-color;
 			color: @study-fcolor;
 			img {
@@ -250,7 +264,7 @@ body {
 				display: block;
 				padding: 0 50px 0 50px;
 			}
-		}	
+		}
 	}
 	/* ~~ The footer ~~ */
 	footer {
@@ -263,28 +277,33 @@ body {
 		padding: @font-size*2 10px 30px 10px;
 		#map {
 			text-align: center;
-		 	ul li {
-		 		text-align: left;
-		 		width: 100px;
-			    position: relative; 
-				display: inline-block;
-				ul {
-					font-size: @font-size - 4;
-					text-align: left;
-					position: absolute; 
-					top: 30px;
+		 	ul {
+		 		li {		 			
+			 		vertical-align: top;
+			 		text-align: left;
+					width: auto;
+					display: inline-block;				
+					a {
+						padding: 0 1em 0em 0em;
+					}
+					ul {						
+					padding: 1em  0 0 0 ;				
+						font-size: @font-size - 4;
+						text-align: left;					
+						li {
+							display: block;
+						}
+					}
 				}
 			/*	white-space: pre; */
 			}
 		}
 		#social {
 			a {
-				text-decoration: none;				
+				text-decoration: none;
 			}
-			float: right;
-			display: inline-block;
-			padding: 0 130px 0 130px;
+			display: block;
+			padding: 30px 0px 0 0px;
 		}
-
 	}
 }
