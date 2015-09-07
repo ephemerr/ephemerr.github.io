@@ -51,7 +51,7 @@ body {
     max-width: 950px;	
 	background-color: #bebefe;	
 	margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
-	color: #000;
+	color: @color-b-dim;
 	overflow: scroll;
 
 	/* ~~ Element/tag selectors ~~ */
@@ -84,26 +84,33 @@ body {
 		float: right;
 		font-size: @font-size -1px;
 	}
-	p.gohome {
+	.gradline {
+			padding: .5em;	
+			background: linear-gradient(to left, @color-c-bleak, @color-main-white);
+			font-size: @font-size+2;
+  		a {color: @color-b-dim;}
+	}
+
+	.gohome {
 		text-align: center;
 		font-size: @font-size -3px;
+		.gradline;
 	}	
+
 	/* ~~ this fixed width container surrounds the other divs ~~ */
 	.container {
 		left: 0px;
 		width: 90%;
-		min-height: 200px;
-		margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */		
-		padding: 1px 1px 30px 1px;
+		min-height: 15em;
+		margin: 0px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */		
+		padding: 1px 1px 1em 1px;
 		-border: 2px solid @color-main;
 		-border-radius: 3px; /* Радиус скругления */
 		-box-shadow: 0 0 10px @color-main;
 		h1 {			
+			.gradline;
 			text-align: left;			
-			color: @h1-color;
-			background: linear-gradient(to bottom, @color-c-bleak, white);
  			font-weight: normal;
-			font-size: @font-size+6;
 		}
 		p {
 			text-align: left;						
@@ -121,34 +128,38 @@ body {
 	.links {
 		text-align: center;
 		ul {
-			padding: 1em;
+			.gradline;
+			width: auto;
 			li {
+				padding-left: 2em;
 				display: inline-block;
-				padding: 0 	1em;
 			}
 		}
 	}
 
 	/* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
 	header {
+		font-family: 'Rupster Script', sans-serif;			
 		text-align: center;
 		background: linear-gradient(to top, #fefcea, @color-main);
 		color: @header-color;
 		#site-name {
 			a { color: @color-main-dim; }
 			font-size: @font-size*3;
-			font-family: 'Rupster Script', sans-serif;			
 			font-weight: normal;
 			padding-top: 20px;
 		}
+		#pripis {
+			font-size: @font-size;
+			font-family: monospace;
+			margin: -.5em 0em 0 2em ;
+		}
 	    /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
 		#nav {
-			padding: 30px;
+			padding: 1em 1em 2em 1em;
 			height: 46px;	
 			font-size: 26px;
-			font-family: Rupster Script, Arial, Helvetica, sans-serif;			
 			text-align: center;
-			-border: 1px solid Blue;	
 
 			a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */				
 				border: none;
@@ -170,7 +181,6 @@ body {
 				}
 			}
 			li {
-				-border: 1px solid green;
 				display: inline-block;
 			}
 
@@ -189,7 +199,7 @@ body {
 			background: @playbill-color;			
 		    color: @playbill-fcolor;
 			.playbill {
-				padding: 0 30px 0 30px;
+				padding: 1em 1em 0 1em;
 				width: "100%";
 			    text-align: center;
 			    font-size: @font-size;
@@ -236,7 +246,7 @@ body {
 		#news {
 			text-align: left;						
 			background:  @news-color;
-			color: @news-fcolor;
+			color: @color-b-condensed;
 			-margin: 30px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
 			-margin: 30px 30px 30px 50px;
 			.newshead {

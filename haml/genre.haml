@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+%html{:lang => "ru"}
+  %head
+    = elem("head")
+    %link{:href => "/css/index.less", :rel => "stylesheet", :type => "text/less"}
+    %script{:src => "/js/less.js"}
+  %body
+ 	%header{:align => "center"}= elem("header")
+  .content
+    .container
+      .links
+        %ul
+          %li
+            %a{:href => "/html/hist.html"} История
+          %li
+            %a{:href => "/html/genre.html"} Наш жанр
+          %li
+            %a{:href => "/html/rucov.html"} Руководитель
+      .gohome
+        %a{:href => "/index.html"} На главную                      
+ 	%footer= elem("footer")

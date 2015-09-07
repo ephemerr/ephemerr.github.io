@@ -8,6 +8,12 @@
  	%header{:align => "center"}= elem("header")
   .content
     #study.container
+      .links
+        %ul
+          %li
+            %a{:href => "/html/hist.html"} Методики
+          %li
+            %a{:href => "/html/genre.html"} Набор 2015
       %a{:href => "/html/study.html"}
         %img.main_img{:src => "/img/stud.jpg"}/
       %p
@@ -16,6 +22,6 @@
       %p#comein
         Набор в студию театра открыт!
         %a{:href => "/html/contact.html"} Приходите.
-    %p.gohome
-      %a{:href => "/index.html"} На главную
+      .gohome
+        %a{:href => "/index.html"} На главную
  	%footer= elem("footer")

@@ -10,7 +10,12 @@ local function elem( el_name )
 	return res
 end
 locals.elem = elem
-local names = { "index", "theatre", "plays", "study", "contact", "main" }
+local names = { "index", "main",
+                "theatre", "plays", "study", "contact",
+                "hist", "rucov", "genre",
+                "method", "reqruit",
+                "allplays"
+              }
 for _, name in pairs(names) do 
 	local rendered = engine:render_file( "../haml/"..name..".haml", locals)
 	html_name = name == "main" and "../index.html" or "../html/"..name..".html"
