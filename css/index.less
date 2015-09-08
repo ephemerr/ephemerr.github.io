@@ -6,6 +6,13 @@
     src: url("../font/Rupster Script.ttf"); /* Путь к файлу со шрифтом */
 }
 
+@media all and (min-width: 50em) {
+    #studio {
+        float: right;
+        width: 40%;
+    }
+}
+
 body {	
 	@color-main: #bebefe;
 	@color-main-dim: #8F8FAD;
@@ -48,9 +55,9 @@ body {
 	font-family: monospace;
 	font-size: @font-size;	
 	min-width: 32em;
-  max-width: 52em;	
+  max-width: 64em;	
 	background-color: #bebefe;	
-	margin: 1em 0 0px 0; /* the auto value on the sides, coupled with the width, centers the layout */
+	margin: 1em auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
 	color: @color-b-dim;
 	overflow: scroll;
 
@@ -89,7 +96,12 @@ body {
 			padding: .5em;	
 			background: linear-gradient(to left, @color-c-bleak, @color-main-white);
 			font-size: @font-size+2;
-  		a {color: @color-b-dim;}
+  		a {
+  			color: @color-b-dim;
+				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+					color: @color-main-condensed;
+				}
+  		}
 	}
 
 	.gohome {
@@ -145,7 +157,9 @@ body {
 		background: linear-gradient(to top, #fefcea, @color-main);
 		color: @header-color;
 		#site-name {
-			a { color: @color-main-dim; }
+			a { 
+				color: @color-main-dim; 
+			}
 			font-size: @font-size*3;
 			font-weight: normal;
 			padding-top: 20px;
@@ -169,6 +183,9 @@ body {
 				color: @header-color;				
 				width: auto;
 				padding: 0px 20px 0px 20px;				
+				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+					color: @color-main-condensed;
+				}
 				.current {
 					color: #000;
 					border: 0;
@@ -176,9 +193,6 @@ body {
 					text-align: center;
 					font-weight: bold;
 					letter-spacing: normal;
-				}
-				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-					color: @color-main-condensed;
 				}
 			}
 			li {
@@ -196,7 +210,7 @@ body {
 		    color: @playbill-fcolor;
 			.playbill {
 				padding: 1em 1em 1em 1em;
-				width: "100%";
+				width: 100%;
 			    text-align: center;
 			    font-size: @font-size;
 			    td {
@@ -216,7 +230,6 @@ body {
 			        }
 			    }
 			    .title_col {
-			        -background: #ffedd0;
 			        .age {
 			            display: none;
 			            float: right;
@@ -228,7 +241,7 @@ body {
 			            font-size: @font-size + 2;
 			        }
 			        .playname {
-			            font-size: @font-size * 2;
+			            font-size: @font-size * 1.5;
 			            font-weight: bold;
 			        }
 			    }
@@ -240,7 +253,7 @@ body {
 			}
 		}
 		#news {
-			text-align: left;						
+			text-align: left;
 			background:  @news-color;
 			color: @color-b-condensed;
 			.newshead {
@@ -271,10 +284,9 @@ body {
 		}
 	}
 	/* ~~ The footer ~~ */
-	footer {
-		color: @footer-fcolor;
+	footer {	
 		text-align: center;
-		font-size: @font-size;
+		font-size: @font-size+1;
 		min-height: @font-size*5;
 		background: linear-gradient(to bottom, white, @color-main); //@footer-color;
 		
@@ -289,10 +301,15 @@ body {
 					display: inline-block;				
 					a {
 						padding: 0 1em 0em 0em;
+						color: @color-b-condensed;
+						&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+							color: @color-main-condensed;
+							-text-decoration: underline;
+						}
 					}
 					ul {						
-					padding: 1em  0 0 0 ;				
-						font-size: @font-size - 4;
+					padding: 1em  0 0 0 ;
+						font-size: @font-size;
 						text-align: left;					
 						li {
 							display: block;

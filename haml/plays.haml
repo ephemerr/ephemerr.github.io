@@ -7,19 +7,5 @@
   %body
  	%header{:align => "center"}=elem("header")
   .content
-    #coming.container
-      %table.playbill{:border => "0", :cellspacing => "0", "text-align" => "center", :width => "100%"}
-        %tr
-          %td.time_col
-            .month Сентябрь
-            .day 13
-            .time воскресенье 15:00
-          %td.title_col
-            .age 18+
-            .about Лариса Ратич
-            .playname Спать пора
-          %td.place_col
-            .station м. Новочеркасская
-            .place КДЦ Красногвардейский
-            .addr пр. Шаумяна, д 22  
+    #coming.container= playbill()      
  	%footer= elem("footer")
