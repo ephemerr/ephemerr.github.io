@@ -9,27 +9,36 @@
     <script src='/js/less.js'></script>
   </head>
   <body></body>
-  <header align='center'><div id='site-name'>
-  <a href='/index.html'>Театр Рассказа</a>
-</div>
-<div id='nav'>
+  <header>
+    <div id='site-name'>
+      <a href='/index.html'>Театр Рассказа</a>
+    </div>
+    <div id='nav'><div id='nav'>
   <ul>
     <li>
-      <a href='/html/theatre.html'>О театре</a>
+      <a class='notcurrent' href='/html/theatre.html'>О театре</a>
     </li>
     <li>
-      <a href='/html/plays.html'>Спектакли</a>
+      <a class='current' href='/html/plays.html'>Спектакли</a>
     </li>
     <li>
-      <a href='/html/study.html'>Клуб-Студия</a>
+      <a class='notcurrent' href='/html/study.html'>Клуб-Студия</a>
     </li>
     <li>
-      <a href='/html/contact.html'>Контакты</a>
+      <a class='notcurrent' href='/html/contact.html'>Контакты</a>
     </li>
   </ul>
-</div></header>
-  <div class='content'>
-    <div class='container' id='coming'><table border='0' cellspacing='0' class='playbill' text-align='center' width='100%'>
+</div></div>
+  </header>
+  <div class='content'><div class='container' id='coming'>
+  <div class='links'>
+    <ul><li>
+  <a class='current' href='/html/plays.html'>Афиша</a>
+</li><li>
+  <a class='notcurrent' href='/html/allplays.html'>Репертуар</a>
+</li></ul>
+  </div>
+  <table border='0' cellspacing='0' class='playbill' text-align='center' width='100%'>
   <tr>
     <td class='time_col'>
       <div class='month'>Сентябрь</div>
@@ -47,8 +56,8 @@
       <div class='addr'>пр. Шаумяна, д 22</div>
     </td>
   </tr>
-</table></div>
-  </div>
+</table>
+</div></div>
   <footer><div id='map'>
   <ul>
     <li>

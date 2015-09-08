@@ -102,6 +102,13 @@ body {
 					color: @color-main-condensed;
 				}
   		}
+			a.current {
+				color: @color-b-condensed;
+				text-decoration : none;
+				text-align: center;
+				font-weight: bold;
+				letter-spacing: normal;
+			}
 	}
 
 	.gohome {
@@ -113,10 +120,9 @@ body {
 	/* ~~ this fixed width container surrounds the other divs ~~ */
 	.container {
 		left: 0px;
-		width: 90%;
-		min-height: 15em;
+		-min-height: 15em;
 		margin: 0px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */		
-		padding: 1em 1em 1em 1em;
+		padding: 1em 2em 1em 2em;
 		-border: 2px solid @color-main;
 		-border-radius: 3px; /* Радиус скругления */
 		-box-shadow: 0 0 10px @color-main;
@@ -175,7 +181,6 @@ body {
 			height: 46px;	
 			font-size: 26px;
 			text-align: center;
-
 			a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */				
 				border: none;
 				text-decoration : none;
@@ -186,19 +191,17 @@ body {
 				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
 					color: @color-main-condensed;
 				}
-				.current {
-					color: #000;
-					border: 0;
-					text-decoration : none;
-					text-align: center;
-					font-weight: bold;
-					letter-spacing: normal;
-				}
+			}
+			a.current {
+				color: @color-b-condensed;
+				text-decoration : none;
+				text-align: center;
+				font-weight: bold;
+				letter-spacing: normal;
 			}
 			li {
 				display: inline-block;
 			}
-
 		}
 	}
 	.content {
@@ -270,6 +273,7 @@ body {
 			}
 		}
 		#studio {
+			padding: 1em 2em 1em 1em;
 			background: @study-color;
 			color: @study-fcolor;
 			img {
