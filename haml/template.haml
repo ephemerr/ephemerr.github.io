@@ -8,6 +8,7 @@
   %header
     #site-name
       %a{:href => "/index.html"} Театр Рассказа
-    #nav= elem("nav")
+    #nav
+      = nav()
   .content= content()
   %footer= elem("footer")
