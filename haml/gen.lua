@@ -5,27 +5,41 @@ local options      = {format = "html5"}
 local engine       = haml.new(options)
 local locals = {}
 
-locals.tree = { ["root"]    = { ["index"] = "Пустая страница", 
-                                ["main"] = "Главная",
-                            },
-                ["theatre"] = {
-                                ["theatre"] = "О театре", 
-                                ["hist"]    = "История", 
-                                ["rucov"]   = "Руководитель", 
-                                ["genre"]   = "Наш жанр"
-                            },
-                ["plays"]   = { 
-                                ["plays"]   = "Афиша", 
-                                ["allplays"]= "Репертуар" 
-                            },
-                ["study"]   = { 
-                                ["study"]   = "Студия", 
-                                ["method"]  = "Методики",
-                                ["reqruit"] = "Набор"
-                            },
-                ["contact"] = { ["contact"] = "Контакты"},
-              }
-
+local tree = { 
+                [1] = {         
+                         [1] = {id = "index",    desc = "Пустая страница"}, 
+                         [2] = {id = "main",     desc = "Главная"},
+                    },
+                [2] = {
+                         [1] = {id = "theatre" , desc = "О театре"},
+                         [2] = {id = "hist"    , desc = "История"}, 
+                         [3] = {id = "rucov"   , desc = "Руководитель"}, 
+                         [4] = {id = "genre"   , desc = "Наш жанр"}
+                    },
+                [3] = { 
+                         [1] = {id = "plays"   , desc = "Афиша"}, 
+                         [2] = {id = "allplays", desc = "Репертуар"} 
+                    },
+                [4] = { 
+                         [1] = {id = "study"   , desc = "Студия"}, 
+                         [2] = {id = "method"  , desc = "Методики"},
+                         [3] = {id = "reqruit" , desc = "Набор"}
+                    },
+                [5] = {
+                         [1] = {id = "contact" , desc = "Контакты"},
+                    },
+ppairs = function(tree, id)
+   for i,sect in ipairs(tree) do    
+        print(i)
+        io.flush()
+       if sect[1].id == id then break end
+   end
+   local function next(sect, i)
+        return sect[i+1] and i+1, sect[i].id, sect[i].desc
+   end
+   return next, sect, 1
+end 
+}
 
 -- local function nav()
 --     res=""
@@ -42,7 +56,9 @@ locals.tree = { ["root"]    = { ["index"] = "Пустая страница",
 
 local function links()
     res=""
-    for name,title in pairs(locals.tree[locals.section]) do
+    for n,val in pairs(tree:section(locals.section)) do
+        name = val.id
+        title = val.desc
         locals.file = "/html/"..name..".html"
         locals.title = title        
         locals.current = locals.name == name and "current" or "notcurrent"
@@ -100,13 +116,18 @@ local function getplaybill(max)
 end
 locals.playbill = getplaybill   
 
-for section,names in pairs(locals.tree) do
+for n,sect in ipairs(tree) do
+    section = sect[1].id
     locals.section = section    
-    for name,_ in pairs(names) do
+    for name,_ in pairs(sect) do
         locals.name = name
         local rendered = engine:render_file("../haml/template.haml", locals)
     	html_name = name == "main" and "../index.html" or "../html/"..name..".html"
     	io.open(html_name,"w+"):write(rendered);
     	print(section.."/"..name .. "...done")
     end
+end
+
+for k,v in tree:ppairs("theatre") do
+    print (k,v)
 end
