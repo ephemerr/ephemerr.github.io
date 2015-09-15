@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+%html{:lang => "ru"}
+  %head
+    = elem("head")
+    %link(href=css rel="stylesheet" type="text/less")
+    %script{:src => "/js/less.js"}
+  %body
+  %header
+    #site-name
+      %a{:href => "/index.html"} Театр Рассказа
+    #nav
+      = nav()
+  .content
+    .container
+      .links
+        %ul= links()
+      = content()
+      .gohome
+        %a{:href => "/index.html"} На главную
+  %footer= elem("footer")

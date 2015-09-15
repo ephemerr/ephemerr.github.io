@@ -1,0 +1,43 @@
+@import url(index.less);
+@import url(playbill.less);
+
+@color-b-condensed: #25608D;
+
+@media all and (min-width: 50em) {
+    #studio {
+        float: right;
+        width: 40%;
+	  }
+}
+
+#news {
+	-	border: 1px solid red;
+	text-align: left;
+	color: @color-b-condensed;
+	.newshead {
+		line-height: 1.2em;
+		padding: 2px 0px 0px 20px;
+		font-size: 14px;
+		display: inline;
+		letter-spacing: .1em;
+	}
+	.newsdate {
+		font-size: 12px;
+		display: inline;
+		font-weight: bold;
+	}
+}
+#studio {
+	background: white;
+	-border: 1px solid green;
+	padding: 1em 2em 1em 1em;
+	img {
+		float: left;
+		width: 30%;
+		margin: 0 30px 0 30px;
+	}
+	p {
+		display: block;
+		padding: 0 50px 0 50px;
+	}
+}

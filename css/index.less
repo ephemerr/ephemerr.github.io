@@ -11,6 +11,9 @@
         float: right;
         width: 40%;
     }
+    .play img {
+        float: left;
+    }
 }
 
 body {	
@@ -76,7 +79,8 @@ body {
 
 	img {
 		width: inherit;
-		box-shadow: 0 0 15px @color-main-dim;
+		box-shadow: 0 0 15px @color-c-condensed;
+		margin: 1em;
 	}
 
 	a {
@@ -93,9 +97,9 @@ body {
 		padding-bottom: 1em;
 	}
 	.gradline {
-			padding: .5em;	
+			padding: .5em .5em .5em .5em;	
 			background: linear-gradient(to left, @color-c-bleak, @color-main-white);
-			font-size: @font-size+2;
+			font-size: @font-size+2;			
   		a {
   			color: @color-b-dim;
 				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
@@ -115,6 +119,7 @@ body {
 		text-align: center;
 		font-size: @font-size -3px;
 		.gradline;
+		margin-top: 1em;
 	}	
 
 	/* ~~ this fixed width container surrounds the other divs ~~ */
@@ -146,6 +151,7 @@ body {
 	}
 	.links {
 		text-align: center;
+		padding-bottom: 1em;
 		ul {
 			.gradline;
 			width: auto;
@@ -208,84 +214,6 @@ body {
 		background: white;
 		padding: 2em 0 2em 0;
 		border-top: 2px solid white;
-		#coming {
-  			background: @playbill-color;			
-		    color: @playbill-fcolor;
-			.playbill {
-				padding: 1em 1em 1em 1em;
-				width: 100%;
-			    text-align: center;
-			    font-size: @font-size;
-			    td {
-			    	padding: 10px 0px 10px 0px;
-			    	border-top: .3em solid @playbill-color - #222;
-				    border-bottom: .3em solid @playbill-color - #222;
-			    }
-			    .time_col {
-			        .month {
-			        }
-			        .day {
-			            font-size: @font-size*4;    
-			            font-family: fantasy;
-			            font-weight: bold;
-			        }
-			        .time {
-			        }
-			    }
-			    .title_col {
-			        .age {
-			            display: none;
-			            float: right;
-			            margin-top: -@font-size;
-			            color: black;
-			            opacity: .3;
-			        }
-			        .about {
-			            font-size: @font-size + 2;
-			        }
-			        .playname {
-			            font-size: @font-size * 1.5;
-			            font-weight: bold;
-			        }
-			    }
-			    .place_col {
-			        .place {
-			            
-			        }
-			    }
-			}
-		}
-		#news {
-			text-align: left;
-			background:  @news-color;
-			color: @color-b-condensed;
-			.newshead {
-				line-height: 1.2em;
-				padding: 2px 0px 0px 20px;
-				font-size: 14px;
-				display: inline;
-				letter-spacing: .1em;
-			}
-			.newsdate {
-				font-size: 12px;
-				display: inline;
-				font-weight: bold;
-			}
-		}
-		#studio {
-			padding: 1em 2em 1em 1em;
-			background: @study-color;
-			color: @study-fcolor;
-			img {
-				float: left;
-				width: 30%;
-				margin: 0 30px 0 30px; 				
-			}
-			p {
-				display: block;
-				padding: 0 50px 0 50px;
-			}
-		}
 	}
 	/* ~~ The footer ~~ */
 	footer {	

@@ -5,7 +5,7 @@ local options      = {format = "html5"}
 local engine       = haml.new(options)
 local locals = {}
 
---     page       title               parent
+--    [1] pagename  [2] title        [3] parent
 local pages =  {
     {  "index"   , "Пустая страница", "root"   }, 
     {  "main"    , "Главная"        , "root"   },
@@ -14,7 +14,7 @@ local pages =  {
     {  "genre"   , "Наш жанр"       , "theatre"},
     {  "rucov"   , "Руководитель"   , "theatre"},
     {  "plays"   , "Афиша"          , "plays"  },
-    {  "allplays", "Репертуар"      , "plays"  },                
+    {  "playinfo", "Репертуар"      , "plays"  },                
     {  "study"   , "Студия"         , "study"  },
     {  "method"  , "Методики"       , "study"  },
     {  "reqruit" , "Набор"          , "study"  },
@@ -28,110 +28,118 @@ local sections = {
    { "contact"   , "Контакты"   },
 } 
 
-loadstring(io.open("../data/playbill.lua", "r"):read("*all"))()
-loadstring(io.open("../data/playinfo.lua", "r"):read("*all"))()
-loadstring(io.open("../data/news.lua", "r"):read("*all"))()
+local function dataload(name) 
+    local chunk = name .. "={"
+    chunk = chunk .. io.open("../data/"..name..".lua", "r"):read("*all")
+    chunk = chunk .. "}"
+    loadstring(chunk)()
+end
+
+dataload("playbill")
+dataload("playinfo")
+dataload("news")
+
+function ilements(tab, from) 
+    from = from or 1    
+    if not tab[from] then return end
+    return tab[from], ilements(tab,from+1)
+end
 
 local function next_fltr(fltr, from)
-    tab, col, val = fltr[1], fltr[2], fltr[3]
+    tab, col, val = ilements(fltr)
     for i = from+1,#tab do
         if tab[i][col] == val then return i, tab[i] end
     end
 end
 
 function pairs_fltr(tab, col, val)
-    return next_fltr, {tab, col, val}, 1
+    return next_fltr, {tab, col, val}, 0
 end
 
-local function nav()
+
+local function elem( el_name )  
+    local el_haml = "../elem/" .. el_name .. ".haml"
+    local res = engine:render_file(el_haml, locals)
+    return res
+end
+locals.elem = elem
+
+locals.nav = function()
     res=""
     for k,v in pairs(sections) do
-        local section,title = v[1],v[2]
+        local section,title = ilements(v)
         locals.file = "/html/"..section..".html"
         locals.title = title
-        locals.current = locals.name == section and "current" or ""
-        res = res..engine:render_file("../elem/links.haml", locals) 
+        _,page = next_fltr({pages,1,locals.name},0)
+        locals.current = page[3] == section and "current" or ""
+        res = res..elem("links") 
     end
     return res
 end
-locals.nav = nav
 
-local function links()
+locals.links = function()
     res=""
     for k,v in pairs_fltr(pages, 3, locals.section) do
-        local name, title, section = v[1], v[2], v[3]
+        local name, title, section = ilements(v)
         locals.file = "/html/"..name..".html"
         locals.title = title        
         locals.current = locals.name == name and "current" or ""
-        res = res..engine:render_file("../elem/links.haml", locals) 
+        res = res..elem("links")
     end
     return res
 end
-locals.links = links
 
-local function css()
+locals.css = function()
     local cssfile = "/css/"..locals.name..".less"
     local is = io.open("../"..cssfile,"r")
     return is and cssfile or "/css/index.less"
 end
-locals.css = css
 
-local function content()
+locals.content = function()
     local haml = "../cont/"..locals.name..".haml"
     if not io.open(haml, "r") then return "" end
     local res = engine:render_file(haml, locals) 
     return res
 end
-locals.content = content
 
-local function elem( el_name )	
-	local el_haml = "../elem/" .. el_name .. ".haml"
-	local res = engine:render_file(el_haml, locals)    
-	return res
-end
-locals.elem = elem
-
-local function topnews()    
-    local max=3
+locals.topnews = function(max)        
     local res = ""
     for i=1,max do
-        locals.date, locals.newshead, locals.newsbody = news[i][1], news[i][2], news[i][3]
-        res = res .. engine:render_file( "../elem/news.haml", locals)
+        locals.date, locals.newshead, locals.newsbody = ilements(news[i])
+        res = res .. elem("news")
     end
     return res
 end
-locals.topnews = topnews
 
-local function getplaybill(max)
+locals.playbill = function(max)
     max = max or 1
     local res = ""    
     for i=1,max do 
-        locals.month,       locals.day,   locals.time       = playbill[i][1], playbill[i][2], playbill[i][3]
-        locals.age,         locals.about, locals.playname   = playbill[i][4], playbill[i][5], playbill[i][6]
-        locals.station,     locals.place, locals.addr       = playbill[i][7], playbill[i][8], playbill[i][9]
-        res = res .. engine:render_file( "../elem/playbill.haml", locals)
+        locals.month,       locals.day,   locals.time,    
+        locals.age,         locals.about, locals.playname,   
+        locals.station,     locals.place, locals.addr   = ilements(playbill[i])
+        res = res .. elem("playbill")
     end
     return res
 end
-locals.playbill = getplaybill   
 
-local function getplayinfo()    
-    local res = ""    
+locals.playinfo = function()    
+    local res = ""
     for i=1,#playinfo do 
-        locals.playname, locals.short, locals.long       = playinfo[i][1], playinfo[i][2], playinfo[i][3]
-        res = res .. engine:render_file( "../elem/playinfo.haml", locals)
+        locals.playname, locals.title, locals.short, locals.long   = ilements(playinfo[i])
+        locals.imgsrc = "/img/playinfo/"..locals.playname.."/1.jpg"
+        res = res .. elem("playinfo")
     end
     return res
 end
-locals.playinfo = getplayinfo   
 
 for k,v in pairs(pages) do
-    local name, title, section = v[1], v[2], v[3]
+    local name, title, section = ilements(v)
     locals.section = section    
     locals.name = name
-    local rendered = engine:render_file("../haml/template.haml", locals)
+    local template = section == "root" and "../haml/template.haml" or "../haml/template_second.haml"
+    local rendered = engine:render_file(template, locals)
 	html_name = name == "main" and "../index.html" or "../html/"..name..".html"
 	io.open(html_name,"w+"):write(rendered);
 	print(section.."/"..name .. "...done")
 end
-
