@@ -17,7 +17,6 @@ local pages =  {
     {  "playinfo", "Репертуар"      , "plays"  },                
     {  "study"   , "Студия"         , "study"  },
     {  "method"  , "Методики"       , "study"  },
-    {  "reqruit" , "Набор"          , "study"  },
     {  "contact" , "Контакты"       , "contact"},
 }
 
@@ -90,9 +89,9 @@ locals.links = function()
 end
 
 locals.css = function()
-    local cssfile = "/css/"..locals.name..".less"
+    local cssfile = "/css/"..locals.name..".css"
     local is = io.open("../"..cssfile,"r")
-    return is and cssfile or "/css/index.less"
+    return is and cssfile or "/css/index.css"
 end
 
 locals.content = function()

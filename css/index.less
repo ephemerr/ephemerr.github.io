@@ -6,16 +6,6 @@
     src: url("../font/Rupster Script.ttf"); /* Путь к файлу со шрифтом */
 }
 
-@media all and (min-width: 50em) {
-    #studio {
-        float: right;
-        width: 40%;
-    }
-    .play img {
-        float: left;
-    }
-}
-
 body {	
 	@color-main: #bebefe;
 	@color-main-dim: #8F8FAD;
@@ -108,7 +98,7 @@ body {
   		}
 			a.current {
 				color: @color-b-condensed;
-				text-decoration : none;
+				//text-decoration : underline;
 				text-align: center;
 				font-weight: bold;
 				letter-spacing: normal;
@@ -151,7 +141,6 @@ body {
 	}
 	.links {
 		text-align: center;
-		padding-bottom: 1em;
 		ul {
 			.gradline;
 			width: auto;
@@ -173,8 +162,7 @@ body {
 				color: @color-main-dim; 
 			}
 			font-size: @font-size*3;
-			font-weight: normal;
-			padding-top: 20px;
+			font-weight: normal;			
 		}
 		#pripis {
 			font-size: @font-size;
@@ -183,13 +171,13 @@ body {
 		}
 	    /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
 		#nav {
-			padding: 1em 1em 2em 1em;
+			//padding: 1em 1em 2em 1em;
 			height: 46px;	
 			font-size: 26px;
 			text-align: center;
 			a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */				
 				border: none;
-				text-decoration : none;
+				//text-decoration : none;
 				text-align: center;
 				color: @header-color;				
 				width: auto;
@@ -200,7 +188,7 @@ body {
 			}
 			a.current {
 				color: @color-b-condensed;
-				text-decoration : none;
+				//text-decoration : none;
 				text-align: center;
 				font-weight: bold;
 				letter-spacing: normal;
@@ -212,7 +200,7 @@ body {
 	}
 	.content {
 		background: white;
-		padding: 2em 0 2em 0;
+		padding: 0em 0 2em 0;
 		border-top: 2px solid white;
 	}
 	/* ~~ The footer ~~ */
@@ -236,7 +224,6 @@ body {
 						color: @color-b-condensed;
 						&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
 							color: @color-main-condensed;
-							-text-decoration: underline;
 						}
 					}
 					ul {						
