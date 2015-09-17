@@ -64,28 +64,28 @@ end
 locals.elem = elem
 
 locals.nav = function()
-    res=""
+    res = {}
     for k,v in pairs(sections) do
         local section,title = ilements(v)
         locals.file = "/html/"..section..".html"
         locals.title = title
         _,page = next_fltr({pages,1,locals.name},0)
         locals.current = page[3] == section and "current" or ""
-        res = res..elem("links") 
+        table.insert(res, elem("links"))
     end
-    return res
+    return table.concat(res)
 end
 
 locals.links = function()
-    res=""
+    res = {}
     for k,v in pairs_fltr(pages, 3, locals.section) do
         local name, title, section = ilements(v)
         locals.file = "/html/"..name..".html"
         locals.title = title        
         locals.current = locals.name == name and "current" or ""
-        res = res..elem("links")
+        table.insert(res, elem("links"))
     end
-    return res
+    return table.concat(res)
 end
 
 locals.css = function()
@@ -102,43 +102,50 @@ locals.content = function()
 end
 
 locals.topnews = function(max)        
-    local res = ""
+    local res = {} 
     for i=1,max do
         locals.date, locals.newshead, locals.newsbody = ilements(news[i])
-        res = res .. elem("news")
+        table.insert(res, elem("news"))
     end
-    return res
+    return table.concat(res)
 end
 
 locals.playbill = function(max)
     max = max or 1
-    local res = ""    
+    local res = {}    
     for i=1,max do 
         locals.month,       locals.day,   locals.time,    
         locals.age,         locals.about, locals.playname,   
         locals.station,     locals.place, locals.addr   = ilements(playbill[i])
-        res = res .. elem("playbill")
+        table.insert(res, elem("playbill"))
     end
-    return res
+    return table.concat(res)
 end
 
 locals.playinfo = function()    
-    local res = ""
+    local res = {} 
     for i=1,#playinfo do 
         locals.playname, locals.title, locals.short, locals.long   = ilements(playinfo[i])
-        locals.imgsrc = "/img/playinfo/"..locals.playname.."/1.jpg"
-        res = res .. elem("playinfo")
+        locals.imgsrc = "/img/playinfo/"..locals.playname.."/1_min.jpg"
+        table.insert(res, elem("playinfo"))
     end
-    return res
+    return table.concat(res)
 end
 
-for k,v in pairs(pages) do
-    local name, title, section = ilements(v)
-    locals.section = section    
-    locals.name = name
-    local template = section == "root" and "../haml/template.haml" or "../haml/template_second.haml"
-    local rendered = engine:render_file(template, locals)
-	html_name = name == "main" and "../index.html" or "../html/"..name..".html"
-	io.open(html_name,"w+"):write(rendered);
-	print(section.."/"..name .. "...done")
+
+local function generate()
+    for k,v in pairs(pages) do
+        local name, title, section = ilements(v)
+        locals.section = section    
+        locals.name = name
+        local template = section == "root" and "../haml/template.haml" or "../haml/template_second.haml"
+        local rendered = engine:render_file(template, locals)
+        html_name = name == "main" and "../index.html" or "../html/"..name..".html"
+        io.open(html_name,"w+"):write(rendered);
+        print(section.."/"..name .. "...done")
+    end
 end
+
+-- do the thing
+generate()
+
