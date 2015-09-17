@@ -7,6 +7,7 @@ for file in *.less
 do  
   lessc $file -o ${file//less/css}
 done
+sed -i s/\;body/\ body/g index.css # format fix
 cd -
 
 cd haml 

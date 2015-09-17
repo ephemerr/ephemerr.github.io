@@ -4,7 +4,7 @@
 @font-face {
     font-family: Rupster Script; /* Гарнитура шрифта */
     src: url("../font/Rupster Script.ttf"); /* Путь к файлу со шрифтом */
-}
+};
 
 body {	
 	@color-main: #bebefe;
@@ -48,7 +48,7 @@ body {
 	font-family: monospace;
 	font-size: @font-size;	
 	min-width: 32em;
-  max-width: 64em;	
+    max-width: 64em;	
 	background-color: #bebefe;	
 	margin: 1em auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
 	color: @color-b-dim;
@@ -61,7 +61,7 @@ body {
 	}
 
 	h1, h2, h3, h4, h5, h6, p {
-			color: @h1-color;
+	    color: @h1-color;
 		margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
 		padding-right: 18px;
 		padding-left: 18px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
@@ -115,12 +115,8 @@ body {
 	/* ~~ this fixed width container surrounds the other divs ~~ */
 	.container {
 		left: 0px;
-		-min-height: 15em;
 		margin: 0px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */		
 		padding: 1em 2em 1em 2em;
-		-border: 2px solid @color-main;
-		-border-radius: 3px; /* Радиус скругления */
-		-box-shadow: 0 0 10px @color-main;
 		h1 {			
 			.gradline;
 			text-align: left;			
