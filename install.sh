@@ -1,5 +1,4 @@
 #!/bin/bash
-
 cd css
 lessc "index.less" -o "index.css"
 lessc "playbill.less" -o "playbill.css"
@@ -9,7 +8,7 @@ do
 done
 sed -i s/\;body/\ body/g index.css # format fix
 cd -
-
+#
 cd haml 
 lua gen.lua
 cd -

@@ -76,6 +76,7 @@ body {
 	a {
 		text-decoration: none;
 		color: @color-main-condensed;
+		border: none;
 		img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
 			border: none;
 		}
@@ -98,9 +99,7 @@ body {
   		}
 			a.current {
 				color: @color-b-condensed;
-				//text-decoration : underline;
 				text-align: center;
-				font-weight: bold;
 				letter-spacing: normal;
 			}
 	}
@@ -167,13 +166,11 @@ body {
 		}
 	    /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
 		#nav {
-			//padding: 1em 1em 2em 1em;
 			height: 46px;	
 			font-size: 26px;
 			text-align: center;
 			a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */				
 				border: none;
-				//text-decoration : none;
 				text-align: center;
 				color: @header-color;				
 				width: auto;
@@ -184,9 +181,7 @@ body {
 			}
 			a.current {
 				color: @color-b-condensed;
-				//text-decoration : none;
 				text-align: center;
-				font-weight: bold;
 				letter-spacing: normal;
 			}
 			li {

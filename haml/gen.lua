@@ -132,7 +132,6 @@ locals.playinfo = function()
     return table.concat(res)
 end
 
-
 local function generate()
     for k,v in pairs(pages) do
         local name, title, section = ilements(v)
@@ -142,10 +141,8 @@ local function generate()
         local rendered = engine:render_file(template, locals)
         html_name = name == "main" and "../index.html" or "../html/"..name..".html"
         io.open(html_name,"w+"):write(rendered);
-        print(section.."/"..name .. "...done")
     end
 end
 
 -- do the thing
 generate()
-
