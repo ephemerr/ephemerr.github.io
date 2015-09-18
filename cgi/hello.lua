@@ -1,6 +1,7 @@
 #!/usr/bin/env wsapi.cgi
 
 local orbit = require "orbit"
+local gen = require "gen"
 
 -- Orbit applications are usually modules,
 -- orbit.new does the necessary initialization
@@ -22,12 +23,17 @@ function say(web, name)
   return render_say(web, name)
 end
 
+function page(web, name)
+  return gen.genpage(name)
+end
+
 -- Builds the application's dispatch table, you can
 -- pass multiple patterns, and any captures get passed to
 -- the controller
 
 hello:dispatch_get(index, "/", "/index")
 hello:dispatch_get(say, "/say/(%a+)")
+hello:dispatch_get(page, "/(%a+)")
 
 -- These are the view functions referenced by the controllers.
 -- orbit.htmlify does through the functions in the table passed

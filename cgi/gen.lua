@@ -136,20 +136,21 @@ locals.playinfo = function()
 end
 
 function genpage(name)
-    local _,page = next_fltr{pages,1,name}
+    local _,page = next_fltr{pages,1,name} or _,pages[1]
     local _, title, section = ilements(page)
     locals.section = section
     locals.name = name
     local template = section == "root" and "../haml/template.haml" or "../haml/template_second.haml"
     local rendered = engine:render_file(template, locals)
-    html_name = name == "main" and "../index.html" or "../html/"..name..".html"
-    io.open(html_name,"w+"):write(rendered);
+    return rendered
 end
 
 function genall()
     for k,v in pairs(pages) do
         local name, title, section = ilements(v)
-        genpage(name)
+        html_name = name == "main" and "../index.html" or "../html/"..name..".html"
+        local p = genpage(name)
+        io.open(html_name,"w+"):write(p);
     end
 end
 
