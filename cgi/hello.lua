@@ -60,8 +60,11 @@ function render_index()
 end
 
 function render_say(web, name)
-   return render_layout(render_hello() .. 
-     p.hello((web.input.greeting or "Hello ") .. name .. "!"))
+   return render_layout(
+        render_hello() .. 
+        p.hello((web.input.greeting or "Hello ") 
+        .. name .. "!")
+     )
 end
 
 orbit.htmlify(hello, "render_.+")

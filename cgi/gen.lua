@@ -1,5 +1,7 @@
 #!/usr/bin/lua
 
+module("gen",package.seeall)
+
 local haml         = require "haml"
 local options      = {format = "html5"}
 local engine       = haml.new(options)
@@ -39,12 +41,13 @@ dataload("playinfo")
 dataload("news")
 
 function ilements(tab, from) 
-    from = from or 1    
+    local from = from or 1    
     if not tab[from] then return end
     return tab[from], ilements(tab,from+1)
 end
 
 local function next_fltr(fltr, from)
+    local from = from or 0    
     tab, col, val = ilements(fltr)
     for i = from+1,#tab do
         if tab[i][col] == val then return i, tab[i] end
@@ -132,17 +135,22 @@ locals.playinfo = function()
     return table.concat(res)
 end
 
-local function generate()
+function genpage(name)
+    local _,page = next_fltr{pages,1,name}
+    local _, title, section = ilements(page)
+    locals.section = section
+    locals.name = name
+    local template = section == "root" and "../haml/template.haml" or "../haml/template_second.haml"
+    local rendered = engine:render_file(template, locals)
+    html_name = name == "main" and "../index.html" or "../html/"..name..".html"
+    io.open(html_name,"w+"):write(rendered);
+end
+
+function genall()
     for k,v in pairs(pages) do
         local name, title, section = ilements(v)
-        locals.section = section    
-        locals.name = name
-        local template = section == "root" and "../haml/template.haml" or "../haml/template_second.haml"
-        local rendered = engine:render_file(template, locals)
-        html_name = name == "main" and "../index.html" or "../html/"..name..".html"
-        io.open(html_name,"w+"):write(rendered);
+        genpage(name)
     end
 end
 
--- do the thing
-generate()
+return _M
