@@ -129,6 +129,7 @@ locals.playinfo = function()
     local res = {} 
     for i=1,#playinfo do 
         locals.playname, locals.title, locals.short, locals.long   = ilements(playinfo[i])
+        locals.title = '"' .. locals.title .. '"'
         locals.imgsrc = "/img/playinfo/"..locals.playname.."/1_min.jpg"
         table.insert(res, elem("playinfo"))
     end
