@@ -52,7 +52,7 @@ body {
     max-width: 64em;	
 	background-color: #bebefe;	
 	margin: 1em auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
-	color: @color-b-condensed;
+	color: #444;
 	overflow: scroll;
 
 	/* ~~ Element/tag selectors ~~ */
@@ -61,7 +61,7 @@ body {
 		margin: 0;
 	}
 
-	h1, h2, h3, h4, h5, h6, p {
+	h1, h2, h3, h4, h5, h6 {
 	    color: @h1-color;
 		margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
 		padding-right: 1em;
