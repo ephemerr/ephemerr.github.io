@@ -68,6 +68,16 @@ body {
         padding-top: 1em;
 	}
 
+	h2 {
+		text-align: center;
+		padding-top: 1.5em;
+	}
+
+	h2 {
+		text-align: center;
+		padding-top: 1.5em;
+	}
+
 	img {
 		width: inherit;
 		box-shadow: 0 0 15px @color-c-condensed;
@@ -213,13 +223,13 @@ body {
 					display: inline-block;				
 					a {
 						padding: 0 1em 0em 0em;
-						color: @color-b-condensed;
+						color: @color-b-dim;
 						&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
 							color: @color-main-condensed;
 						}
 					}
 					ul {						
-					padding: 1em  0 0 0 ;
+					padding: .3em  0 0 0 ;
 						font-size: @font-size;
 						text-align: left;					
 						li {
@@ -227,14 +237,18 @@ body {
 						}
 					}
 				}
-			}
+			}            
 		}
 		#social {
 			a {
 				text-decoration: none;
 			}
 			display: block;
-			padding: 30px 0px 0 0px;
+			padding: 1em 0em 0 3em;
+            img {
+                box-shadow: none;
+                margin: 0;
+            }
 		}
 	}
 }
