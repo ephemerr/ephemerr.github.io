@@ -1,5 +1,7 @@
 #!/usr/bin/lua
 
+local inspect = require "inspect"
+
 module("gen",package.seeall)
 
 local haml         = require "haml"
@@ -113,13 +115,21 @@ locals.topnews = function(max)
     return table.concat(res)
 end
 
-locals.playbill = function(max)
-    max = max or 1
+locals.playbill = function(past, future)    
+    if past > #playbill.past then past = #playbill.past end
+    if future > #playbill.future then future = #playbill.future end
+    max = max or 1    
     local res = {}    
-    for i=1,max do 
+    for i = 1 + #playbill.past - past, #playbill.past do 
         locals.month,       locals.day,   locals.time,    
         locals.age,         locals.about, locals.playname,   
-        locals.station,     locals.place, locals.addr   = ilements(playbill[i])
+        locals.station,     locals.place, locals.addr  = ilements(playbill.past[i])
+        table.insert(res, elem("playbill"))
+    end
+    for i = 1,future do 
+        locals.month,       locals.day,   locals.time,    
+        locals.age,         locals.about, locals.playname,   
+        locals.station,     locals.place, locals.addr  = ilements(playbill.future[i])
         table.insert(res, elem("playbill"))
     end
     return table.concat(res)
