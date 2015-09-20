@@ -136,7 +136,8 @@ locals.playinfo = function()
 end
 
 function genpage(name)
-    local _,page = next_fltr{pages,1,name} or _,pages[1]
+    local _,page = next_fltr{pages,1,name} 
+    page = page or pages[1]
     local _, title, section = ilements(page)
     locals.section = section
     locals.name = name

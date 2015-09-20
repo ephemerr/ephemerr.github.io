@@ -3,7 +3,7 @@
 
 @font-face {
     font-family: Rupster Script; /* Гарнитура шрифта */
-    src: url("../font/Rupster Script.ttf"); /* Путь к файлу со шрифтом */
+    src: url("/font/Rupster Script.ttf"); /* Путь к файлу со шрифтом */
 }
 
 body {	
@@ -63,8 +63,9 @@ body {
 	h1, h2, h3, h4, h5, h6, p {
 	    color: @h1-color;
 		margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
-		padding-right: 18px;
-		padding-left: 18px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+		padding-right: 1em;
+		padding-left: 1em; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+        padding-top: 1em;
 	}
 
 	img {
@@ -148,11 +149,11 @@ body {
 
 	/* ~~ the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo ~~ */
 	header {
-		font-family: 'Rupster Script', sans-serif;			
 		text-align: center;
 		background: linear-gradient(to top, #fefcea, @color-main);
 		color: @header-color;
 		#site-name {
+		    font-family: 'Rupster Script', sans-serif;			
 			a { 
 				color: @color-main-dim; 
 			}
