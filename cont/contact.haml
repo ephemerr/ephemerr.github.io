@@ -1,11 +1,30 @@
 #addr_info.container
-  %div Дом Писателя,
-  %div ул. Звенигородская, д.22
-  %div (м. «Звенигородская»)
+  %table
+    %tr
+      %td
+        E-mail:
+      %td
+        %a{:href => "mailto:polilog@yandex.ru"} polilog@yandex.ru
+    %tr
+      %td
+        Вопросы по сайту: 
+      %td
+        %a{:href => "mailto:ephemerr@yandex.ru"} ephemerr@yandex.ru
+    %tr.phone
+      %td
+        Телефон: 
+      %td
+        +7-921-905-85-80         
+    %tr
+      %td
+        Молодежная группа: 
+      %td
+        +7-921-323-00-41        
+    %tr
+      %td Адрес:
+      %td
+        %div Дом Писателя,
+        %div ул. Звенигородская, д.22
+        %div (м. «Звенигородская»)
   %div
-    %div
-      email:
-      %a{:href => "mailto:polilog@yandex.ru"} polilog@yandex.ru
-    %p
-      %div Телефон: +79523661866
-      %img.addresmap{:src => "/img/dompis_map.jpg"}/
+    %img.addresmap{:src => "/img/dompis_map.jpg"}/

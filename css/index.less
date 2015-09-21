@@ -38,8 +38,6 @@ body {
 	@footer-fcolor: @color-main-dim;
 	@footer-color: @color-main;
 
-	@playbill-color: white;
-	@playbill-fcolor: @color-main-dim;
 	@news-color: white;
 	@news-fcolor: black;
 	@study-color: white;
@@ -62,7 +60,7 @@ body {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-	    color: @h1-color;
+    color: @h1-color;
 		margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
 		padding-right: 1em;
 		padding-left: 1em; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
@@ -104,7 +102,7 @@ body {
 	}
 	.gradline {
 			padding: .5em .5em .5em .5em;	
-			background: linear-gradient(to left, @color-c-bleak, @color-main-white);
+			background: linear-gradient(to left, @color-main-white, @color-c-bleak);
 			font-size: 110%; 
   		a {
   			color: @color-b-dim;
