@@ -6,20 +6,40 @@ local ins = require "inspect"
 
 module("o", package.seeall, orbit.new)
 
+
+---- CONTROLERS
+
 function index(web, name)
-  return show_info(web)
-  --return   --return gen.genpage"main"
+    web:set_cookie("user", "master") 
+    return "index"
 end
 
 function page(web, name)
-  return show_info(web)
-  --return gen.genpage(name)
-end
-
-function post(web, name)
-    local inner_html = ins(web.POST) 
+    if name == "cookie" then 
+        return [[
+        Content-type: text/html
+        Set-Cookie: "username=aaa13; expires=Friday, 31-Dec-99 23:59:59 GMT; path=/; domain=my.dom;"
+        ]]
+        end
+    local inner_html = ins(web.GET) .. ins(web.input) 
     return render_layout(inner_html)
 end
+
+function posthome(web, name)
+    local inner_html = ins(web.POST) 
+                        .. ins(web.input) 
+                        .. ins(web.vars)
+    return render_layout(inner_html)
+end
+
+---- DISPATCH
+
+o:dispatch_get(index, "/")
+o:dispatch_get(page, "/(%a+)")
+o:dispatch_post(posthome, "/")
+o:dispatch_post(post, "/(%a+)")
+ 
+----- 
 
 function show_info(web, add) 
     return 
@@ -27,14 +47,9 @@ function show_info(web, add)
      "- - -" ..
      "web.real_path: " .. web.real_path ..
      "- - -" ..
-     "web.path_info: " .. web.path_info .. " _____" .. add 
+     "web.path_info: " .. web.path_info .. " _____" .. (add or "" )
 end
 
-
-o:dispatch_get(index, "/")
-o:dispatch_get(page, "/(%a+)")
-o:dispatch_post(post, "/")
- 
 
 function render_layout(inner_html)
    return html{
