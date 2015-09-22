@@ -13,6 +13,7 @@ function run(wsapi_env)
     coroutine.yield("<p>PATH_INFO: " .. wsapi_env.PATH_INFO .. "</p>")
     coroutine.yield("<p>SCRIPT_NAME: " .. wsapi_env.SCRIPT_NAME .. "</p>")
     coroutine.yield("<p>QUERY_STRING" .. wsapi_env.QUERY_STRING .. "</p>")
+    coroutine.yield("<pre>" .. block(wsapi_env) ..  "</pre>")
     coroutine.yield("</body></html>")
   end
 
