@@ -1,10 +1,11 @@
-#!/usr/bin/env wsapi.cgi
+#!/usr/bin/env wsapi.fcgi
 
 local orbit = require "orbit"
 local gen = require "gen"
 local serpent = require "serpent"
-local block = serpent.block
+local block = function(t) return  serpent.block(t, {comment=false}) end
 local line = function(t) return  serpent.line(t, {comment=false}) end
+local http = require("socket.http")
 
 module("o", package.seeall, orbit.new)
 
@@ -28,14 +29,7 @@ function page(web, name)
 end
 
 function posthome(web, name)
-    local inner_html = line(web.POST) 
-                        .. block(web.vars)
-    local answer = io.open("../data/answer.lua","a+")
-    if answer then 
-        entry = {web.POST.name, web.POST.text}
-       answer:write(line(entry) .. ",\n")
-    end
-    return render_layout(inner_html)
+    return answer(web)
 end
 
 ---- DISPATCH
@@ -43,9 +37,21 @@ end
 o:dispatch_get(index, "/")
 o:dispatch_get(page, "/(%a+)")
 o:dispatch_post(posthome, "/")
-o:dispatch_post(post, "/(%a+)")
+o:dispatch_post(answer, "/answer")
  
 ----- 
+function answer(web)
+    local inner_html = block(web.POST)
+                        .. block(web.vars)
+                        .. block(web.input)
+                        .. web.vars.REMOTE_ADDR
+    local answer = io.open("../data/answer.lua","a+")
+    if answer then 
+        entry = {web.POST.name, web.POST.text}
+       answer:write(line(entry) .. ",\n")
+    end
+    return render_layout(inner_html)
+end
 
 function show_info(web, add) 
     return 
