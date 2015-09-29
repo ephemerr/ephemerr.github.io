@@ -4,10 +4,11 @@
     = elem("head")
     %link(href=css rel="stylesheet" type="text/css")
   %body
-  %header
-    #site-name
-      %a{:href => "/index.html"} Театр Рассказа
-    #nav
-      = nav()
-  .content= content()
-  %footer= elem("footer")
+    .overlay
+    %header
+      #site-name
+        %a{:href => "/index.html"} Театр Рассказа
+      #nav
+        = nav()
+    .content= content()
+    %footer= elem("footer")

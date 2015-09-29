@@ -12,20 +12,20 @@
     }
 }
 
-img.maxi  {
-    display: none;
-    margin: auto;    
-    position: absolute;
-    z-index: 10;
-    width: 100%;
+.zoomable {
+    position: relative;
+    img.maxi {
+        display: none;
+        margin: auto;    
+        position: absolute;
+        z-index: 10;
+        width: 100%;
+    }
+    img.mini {
+    }
 }
-
-img.mini  {
-}
-
 
 body {	
-    position: relative;
 	@color-main: #bebefe;
 	@color-main-dim: #8F8FAD;
 	@color-main-condensed: #26268D;

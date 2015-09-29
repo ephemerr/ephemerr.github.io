@@ -8,13 +8,14 @@
 <script src='/js/imgzoom.js'></script>
     <link href='/css/playinfo.css' rel='stylesheet' type='text/css'>
   </head>
-  <body></body>
-  <header>
-    <div id='site-name'>
-      <a href='/index.html'>Театр Рассказа</a>
-    </div>
-    <div id='nav'>
-      <li>
+  <body>
+    <div class='overlay'></div>
+    <header>
+      <div id='site-name'>
+        <a href='/index.html'>Театр Рассказа</a>
+      </div>
+      <div id='nav'>
+        <li>
   <a class='' href='/html/theatre.html'>О театре</a>
 </li><li>
   <a class='current' href='/html/plays.html'>Спектакли</a>
@@ -23,20 +24,20 @@
 </li><li>
   <a class='' href='/html/contact.html'>Контакты</a>
 </li>
-    </div>
-  </header>
-  <div class='content'>
-    <div class='container'>
-      <div class='links'>
-        <ul><li>
+      </div>
+    </header>
+    <div class='content'>
+      <div class='container'>
+        <div class='links'>
+          <ul><li>
   <a class='' href='/html/plays.html'>Афиша</a>
 </li><li>
   <a class='current' href='/html/playinfo.html'>Репертуар</a>
 </li></ul>
-      </div>
-      <div class='playinfo'><div class='container'>
+        </div>
+        <div class='playinfo'><div class='container'>
   <div class='info'>
-    <div><div id='imgname'>
+    <div><div class='zoomable' id='imgname'>
   <img class='mini' onclick='zoomin(this)' src='/img/playinfo/blocada/1_min.jpg'>
   <img class='maxi' onclick='zoomout(this)' src='/img/playinfo/blocada/1_max.jpg'>
 </div></div>
@@ -46,7 +47,7 @@
   </div>
 </div><div class='container'>
   <div class='info'>
-    <div><div id='imgname'>
+    <div><div class='zoomable' id='imgname'>
   <img class='mini' onclick='zoomin(this)' src='/img/playinfo/ohenry/1_min.jpg'>
   <img class='maxi' onclick='zoomout(this)' src='/img/playinfo/ohenry/1_max.jpg'>
 </div></div>
@@ -56,7 +57,7 @@
   </div>
 </div><div class='container'>
   <div class='info'>
-    <div><div id='imgname'>
+    <div><div class='zoomable' id='imgname'>
   <img class='mini' onclick='zoomin(this)' src='/img/playinfo/shukshin/1_min.jpg'>
   <img class='maxi' onclick='zoomout(this)' src='/img/playinfo/shukshin/1_max.jpg'>
 </div></div>
@@ -66,7 +67,7 @@
   </div>
 </div><div class='container'>
   <div class='info'>
-    <div><div id='imgname'>
+    <div><div class='zoomable' id='imgname'>
   <img class='mini' onclick='zoomin(this)' src='/img/playinfo/chehov/1_min.jpg'>
   <img class='maxi' onclick='zoomout(this)' src='/img/playinfo/chehov/1_max.jpg'>
 </div></div>
@@ -76,7 +77,7 @@
   </div>
 </div><div class='container'>
   <div class='info'>
-    <div><div id='imgname'>
+    <div><div class='zoomable' id='imgname'>
   <img class='mini' onclick='zoomin(this)' src='/img/playinfo/obrazcov/1_min.jpg'>
   <img class='maxi' onclick='zoomout(this)' src='/img/playinfo/obrazcov/1_max.jpg'>
 </div></div>
@@ -86,7 +87,7 @@
   </div>
 </div><div class='container'>
   <div class='info'>
-    <div><div id='imgname'>
+    <div><div class='zoomable' id='imgname'>
   <img class='mini' onclick='zoomin(this)' src='/img/playinfo/medved/1_min.jpg'>
   <img class='maxi' onclick='zoomout(this)' src='/img/playinfo/medved/1_max.jpg'>
 </div></div>
@@ -96,7 +97,7 @@
   </div>
 </div><div class='container'>
   <div class='info'>
-    <div><div id='imgname'>
+    <div><div class='zoomable' id='imgname'>
   <img class='mini' onclick='zoomin(this)' src='/img/playinfo/victoria/1_min.jpg'>
   <img class='maxi' onclick='zoomout(this)' src='/img/playinfo/victoria/1_max.jpg'>
 </div></div>
@@ -105,12 +106,12 @@
     <p>Эта история о нас с вами. О душевной черствости, о нежелании понять другого и невозможности существования в замкнутом пространстве коммунальной квартиры. А, в результате – пиррова победа. Вы скажете:"Это не про меня", тем лучше. Пусть так оно и будет.</p>
   </div>
 </div></div>
-      <div class='gohome'>
-        <a href='/index.html'>На главную</a>
+        <div class='gohome'>
+          <a href='/index.html'>На главную</a>
+        </div>
       </div>
     </div>
-  </div>
-  <footer><div id='map'>
+    <footer><div id='map'>
   <ul>
     <li>
       <a href='/html/theatre.html'>О театре</a>
@@ -159,4 +160,5 @@
     </li>
   </ul>
 </div></footer>
+  </body>
 </html>
