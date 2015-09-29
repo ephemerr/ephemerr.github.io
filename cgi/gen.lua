@@ -42,6 +42,8 @@ dataload("playbill")
 dataload("playinfo")
 dataload("news")
 
+---- UTILS
+
 function ilements(tab, from) 
     local from = from or 1    
     if not tab[from] then return end
@@ -60,6 +62,11 @@ function pairs_fltr(tab, col, val)
     return next_fltr, {tab, col, val}, 0
 end
 
+---- API
+
+locals.script = function(scriptname)
+    return io.open("/js/"..scriptname..".js","r"):read("*all")
+end
 
 local function elem( el_name )  
     local el_haml = "../elem/" .. el_name .. ".haml"
@@ -67,6 +74,14 @@ local function elem( el_name )
     return res
 end
 locals.elem = elem
+
+local function img(imgname)
+    locals.imgname = imgname
+    locals.imgmini = "/img/".. imgname .. "_min.jpg"
+    locals.imgmaxi = "/img/".. imgname .. "_max.jpg"
+    return elem("img")
+end
+locals.img = img
 
 locals.nav = function()
     res = {}
@@ -140,7 +155,7 @@ locals.playinfo = function()
     for i=1,#playinfo do 
         locals.playname, locals.title, locals.short, locals.long   = ilements(playinfo[i])
         locals.title = '"' .. locals.title .. '"'
-        locals.imgsrc = "/img/playinfo/"..locals.playname.."/1_min.jpg"
+        locals.imgname = "playinfo/"..locals.playname.."/1"
         table.insert(res, elem("playinfo"))
     end
     return table.concat(res)
