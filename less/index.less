@@ -6,12 +6,6 @@
     src: url("/font/Rupster Script.ttf"); /* Путь к файлу со шрифтом */
 }
 
-@media all and (min-width: 50em) {
-    img.mini  {
-        float: left;
-    }
-}
-
 .zoomable {
     position: relative;
     img.maxi {
@@ -19,16 +13,29 @@
         margin: auto;    
         position: absolute;
         z-index: 10;
-        width: 100%;
+        max-width: 52em; 
         cursor: zoom-out;
     }
     img.mini {
+        display: block;
+        height: 13em;
         cursor: zoom-in;
+    }
+}
+
+@media all and (min-width: 50em) {
+    img.mini  {
+        display: block;
+        float: left;
     }
 }
 
 .pic img {
   margin: 2em 2em 2em 1em;
+}
+
+.page {
+    padding: 1em;
 }
 
 body {	
@@ -181,6 +188,32 @@ body {
 			}
 		}
 	}
+
+    #map {
+        text-align: center;
+        ul {
+            li {
+                a {
+				    padding: 0px 20px 0px 20px;				
+                }
+                position: relative;
+                display: inline-block;
+                ul {
+                    position: absolute;
+                    display: none;
+                    li {
+                        display: inline-block;
+                    }   
+                }
+            }
+            li:hover ul {
+                    display: block;
+                li {
+                }
+            }
+        }
+        display: none;
+    }
 
 	header {
 		text-align: center;

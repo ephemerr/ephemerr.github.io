@@ -84,13 +84,27 @@ local function img(imgname)
 end
 locals.img = img
 
+locals.map = function()
+    local res = {}
+    for k,v in pairs(sections) do
+        local section,title = ilements(v)
+        locals.section = section
+        locals.s_file = "/html/"..section..".html"
+        locals.s_title = title
+        _,page = next_fltr{pages,1,locals.name}
+        locals.current = page[3] == section and "current" or ""
+        table.insert(res, elem("section"))
+    end
+    return table.concat(res)
+end
+
 locals.nav = function()
-    res = {}
+    local res = {}
     for k,v in pairs(sections) do
         local section,title = ilements(v)
         locals.file = "/html/"..section..".html"
         locals.title = title
-        _,page = next_fltr({pages,1,locals.name},0)
+        _,page = next_fltr{pages,1,locals.name}
         locals.current = page[3] == section and "current" or ""
         table.insert(res, elem("links"))
     end
@@ -98,7 +112,7 @@ locals.nav = function()
 end
 
 locals.links = function()
-    res = {}
+    local res = {}
     for k,v in pairs_fltr(pages, 3, locals.section) do
         local name, title, section = ilements(v)
         locals.file = "/html/"..name..".html"
@@ -176,7 +190,7 @@ end
 function genall()
     for k,v in pairs(pages) do
         local name, title, section = ilements(v)
-        html_name = name == "main" and "../index.html" or "../html/"..name..".html"
+        local html_name = name == "main" and "../index.html" or "../html/"..name..".html"
         local p = genpage(name)
         io.open(html_name,"w+"):write(p);
     end
