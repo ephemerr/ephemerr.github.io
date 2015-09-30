@@ -13,6 +13,7 @@ local locals = {}
 local pages =  {
     {  "index"   , "Пустая страница", "root"   }, 
     {  "main"    , "Главная"        , "root"   },
+    {  "error"   , "Не найдено"     , "root"   },
     {  "theatre" , "О театре"       , "theatre"},
     {  "hist"    , "История"        , "theatre"},
     {  "genre"   , "Наш жанр"       , "theatre"},
