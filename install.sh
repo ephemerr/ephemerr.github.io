@@ -1,15 +1,11 @@
 #!/bin/bash
 
 # CSS compile
-cd css
-lessc "index.less" -o "index.css"
-lessc "playbill.less" -o "playbill.css"
-for file in *.less
+for file in less/*.less
 do
   lessc $file -o ${file//less/css}
 done
-sed -i s/\;body/\ body/g index.css # format fix
-cd -
+sed -i s/\;body/\ body/g css/index.css # format fix
 
 #
 cd cgi
