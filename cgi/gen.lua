@@ -86,15 +86,17 @@ locals.img = img
 
 locals.map = function()
     local res = {}
+    local cur_section = locals.section
     for k,v in pairs(sections) do
         local section,title = ilements(v)
-        locals.section = section
+        locals.section = section 
         locals.s_file = "/html/"..section..".html"
         locals.s_title = title
         _,page = next_fltr{pages,1,locals.name}
         locals.current = page[3] == section and "current" or ""
         table.insert(res, elem("section"))
     end
+    locals.section = cur_section -- restore 
     return table.concat(res)
 end
 
