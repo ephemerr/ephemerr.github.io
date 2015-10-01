@@ -16,17 +16,17 @@ local pages =  {
     {  "error"   , "Не найдено"     , "root"   },
     {  "theatre" , "О театре"       , "theatre"},
     {  "hist"    , "История"        , "theatre"},
-    {  "genre"   , "Наш жанр"       , "theatre"},
+    {  "genre"   , "Наш жанр"       , ""},
     {  "rucov"   , "Руководитель"   , "theatre"},
     {  "plays"   , "Афиша"          , "plays"  },
     {  "playinfo", "Репертуар"      , "plays"  },                
     {  "study"   , "Студия"         , "study"  },
-    {  "method"  , "Методики"       , "study"  },
+    {  "method"  , "Методики"       , ""  },
     {  "contact" , "Контакты"       , "contact"},
 }
 
 local sections = {
-   { "theatre"   , "О театре"   },
+   { "theatre"   , "Театр"   },
    { "plays"     , "Спектакли"  },
    { "study"     , "Студия"     },
    { "contact"   , "Контакты"   },

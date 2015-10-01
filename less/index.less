@@ -219,6 +219,7 @@ body {
             ul {
                 padding: 0;
                 margin: 0;
+                display: inline-block;
                 position: relative;
                 li {
                     display: inline-block;
@@ -226,21 +227,21 @@ body {
 			            font-size: 90%;
                         position: absolute;
                         display: none;
-                        .panel {
-                            position: absolute;
-                            left: 0;
-                            top: 0;
-                            width: 100%;
-			                .gradline;
-                            z-index: 15;
-                        }
-                        li a {
-                            z-index: 10;
-                        }
                     }
                     &:hover ul {
                        //display: block;
                     }
+                }
+                #panel {
+                    height: 3ex;
+                    display: none;
+                    //width: 110%;
+                    padding: .1em;
+                    //border: 1px  solid black;
+                    .gradline;
+                }
+                &:hover #panel  {
+                    //display: block;
                 }
             }
 		}
