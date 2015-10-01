@@ -98,19 +98,6 @@ locals.map = function()
     return table.concat(res)
 end
 
-locals.nav = function()
-    local res = {}
-    for k,v in pairs(sections) do
-        local section,title = ilements(v)
-        locals.file = "/html/"..section..".html"
-        locals.title = title
-        _,page = next_fltr{pages,1,locals.name}
-        locals.current = page[3] == section and "current" or ""
-        table.insert(res, elem("links"))
-    end
-    return table.concat(res)
-end
-
 locals.links = function()
     local res = {}
     for k,v in pairs_fltr(pages, 3, locals.section) do
