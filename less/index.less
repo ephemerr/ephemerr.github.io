@@ -10,10 +10,10 @@
     position: relative;
     img.maxi {
         display: none;
-        margin: auto;    
+        margin: auto;
         position: absolute;
         z-index: 10;
-        max-width: 52em; 
+        max-width: 52em;
         cursor: zoom-out;
     }
     img.mini {
@@ -38,7 +38,7 @@
     padding: 1em;
 }
 
-body {	
+body {
 	@color-main: #bebefe;
 	@color-main-dim: #8F8FAD;
 	@color-main-condensed: #26268D;
@@ -62,9 +62,9 @@ body {
 	@color-c-dim: #AEA58B;
 	@color-c-condensed: #8E7324;
 	@color-c-bleak: #FFF2CC;
-	@color-c-white: #FFF7DF;	
+	@color-c-white: #FFF7DF;
 
-	
+
 	@header-color: @color-main-dim;
 	@h1-color: @color-b-condensed;
 	@footer-fcolor: @color-main-dim;
@@ -75,12 +75,12 @@ body {
 	@study-color: white;
 	@study-fcolor: black;
 
-	@font-size: 16px;	
+	@font-size: 16px;
 	font-family: monospace;
-	font-size: @font-size;	
+	font-size: @font-size;
 	min-width: 32em;
-    max-width: 64em;	
-	background-color: #bebefe;	
+    max-width: 64em;
+	background-color: #bebefe;
 	margin: 1em auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
 	color: #444;
 	overflow: scroll;
@@ -101,11 +101,6 @@ body {
     p {
         padding: 0 1em 0 1em;
     }
-
-	h2 {
-		text-align: center;
-		padding-top: 1.5em;
-	}
 
 	h2 {
 		text-align: center;
@@ -133,9 +128,9 @@ body {
 		padding-bottom: 1em;
 	}
 	.gradline {
-			padding: .5em .5em .5em .5em;	
+			padding: .5em .5em .5em .5em;
 			background: linear-gradient(to left, @color-main-white, @color-c-bleak);
-			font-size: 110%; 
+			font-size: 110%;
   		a {
   			color: @color-b-dim;
 				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
@@ -153,20 +148,20 @@ body {
 		text-align: center;
 		.gradline;
 		margin-top: 1em;
-	}	
+	}
 
 	/* ~~ this fixed width container surrounds the other divs ~~ */
 	.container {
 		left: 0px;
-		margin: 0px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */		
+		margin: 0px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
 		padding: 1em 2em 1em 2em;
-		h1 {			
+		h1 {
 			.gradline;
-			text-align: left;			
+			text-align: left;
  			font-weight: normal;
 		}
 		p {
-			text-align: left;						
+			text-align: left;
 			text-indent: 2em;
 		}
 	}
@@ -189,60 +184,29 @@ body {
 		}
 	}
 
-    #map {
-        text-align: center;
-        ul {
-            li {
-                a {
-				    padding: 0px 20px 0px 20px;				
-                }
-                position: relative;
-                display: inline-block;
-                ul {
-                    position: absolute;
-                    display: none;
-                    li {
-                        display: inline-block;
-                    }   
-                }
-            }
-            li:hover ul {
-                    display: block;
-                li {
-                }
-            }
-        }
-        display: none;
-    }
-
 	header {
 		text-align: center;
 		background: linear-gradient(to top, #fefcea, @color-main);
 		color: @header-color;
 		#site-name {
-		    font-family: 'Rupster Script', sans-serif;			
-			a { 
-				color: @color-main-dim; 
+		    font-family: 'Rupster Script', sans-serif;
+			a {
+				color: @color-main-dim;
 			}
 			font-size: @font-size*3;
-			font-weight: normal;			
-		}
-		#pripis {
-			font-size: @font-size;
-			font-family: monospace;
-			margin: -.5em 0em 0 2em ;
+			font-weight: normal;
 		}
 	    /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
 		#nav {
-			height: 46px;	
-			font-size: 26px;
+			height: 46px;
+			font-size: 130%;
 			text-align: center;
-			a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */				
+			a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
 				border: none;
 				text-align: center;
-				color: @header-color;				
+				color: @header-color;
 				width: auto;
-				padding: 0px 20px 0px 20px;				
+				padding: 0px 20px 0px 20px;
 				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
 					color: @color-main-condensed;
 				}
@@ -252,62 +216,80 @@ body {
 				text-align: center;
 				letter-spacing: normal;
 			}
-			li {
-				display: inline-block;
-			}
+            ul {
+                padding: 0;
+                margin: 0;
+                position: relative;
+                li {
+                    display: inline-block;
+                    ul {
+			            font-size: 90%;
+                        position: absolute;
+                        display: none;
+                        .panel {
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            width: 100%;
+			                .gradline;
+                            z-index: 15;
+                        }
+                        li a {
+                            z-index: 10;
+                        }
+                    }
+                    &:hover ul {
+                       //display: block;
+                    }
+                }
+            }
 		}
 	}
 	.content {
 		background: white;
-		padding: 0em 0 2em 0;
-		border-top: 2px solid white;
 	}
-	/* ~~ The footer ~~ */
-	footer {	
+	footer {
 		text-align: center;
-		font-size: @font-size+1;
+		font-size: 105%;
 		min-height: @font-size*5;
 		background: linear-gradient(to bottom, white, @color-main); //@footer-color;
-		
-		padding: @font-size*2 10px 30px 10px;
-		#map {
-			text-align: center;
-		 	ul {
-		 		li {		 			
-			 		vertical-align: top;
-			 		text-align: left;
-					width: auto;
-					display: inline-block;				
-					a {
-						padding: 0 1em 0em 0em;
-						color: @color-b-dim;
-						&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-							color: @color-main-condensed;
-						}
-					}
-					ul {						
-					padding: .3em  0 0 0 ;
-						font-size: @font-size;
-						text-align: left;					
-						li {
-							display: block;
-						}
-					}
-                }
-                li#social {
-                    a {
-                        text-decoration: none;
-                        padding: 0;
-                        margin: 0;
-                    }
-                    padding: 1em 0em 0 3em;
-                    img {
-                        width: 32px;
-                        box-shadow: none;
-                        margin: 3px;
+
+		padding: 2ex 10px 30px 10px;
+        ul {
+            li {
+                vertical-align: top;
+                text-align: left;
+                width: auto;
+                display: inline-block;
+                a {
+                    padding: 0 1em 0em 0em;
+                    color: @color-b-dim;
+                    &:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+                        color: @color-main-condensed;
                     }
                 }
-			}            
-		}
+                ul {
+                    padding: .3em  0 0 0 ;
+                    font-size: @font-size;
+                    text-align: left;
+                    li {
+                        display: block;
+                    }
+                }
+            }
+            #social {
+                a {
+                    text-decoration: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                padding: 1em 0em 0 3em;
+                img {
+                    width: 32px;
+                    box-shadow: none;
+                    margin: 3px;
+                }
+            }
+        }
 	}
 }

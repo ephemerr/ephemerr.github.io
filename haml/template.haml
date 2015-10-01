@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 %html{:lang => "ru"}
-  %head
-    = elem("head")
-    %link(href=css rel="stylesheet" type="text/css")
+  %head= elem("head")
   %body
     .overlay
-    %header
-      #site-name
-        %a{:href => "/index.html"} Театр Рассказа
-      #nav
-        = nav()
+    %header= elem("header")
     .content= content()
     %footer= elem("footer")

@@ -1,31 +1,7 @@
-#map
-  %ul
-    %li
-      %a{:href => "/html/theatre.html"} О театре
-      %ul
-        %li
-          %a{:href => "/html/hist.html"} История
-        %li
-          %a{:href => "/html/genre.html"} Наш жанр
-        %li
-          %a{:href => "/html/rucov.html"} Руководитель
-    %li
-      %a{:href => "/html/plays.html"} Спектакли
-      %ul
-        %li
-          %a{:href => "/html/plays.html"} Афиша
-        %li
-          %a{:href => "/html/playinfo.html"} Репертуар
-    %li
-      %a{:href => "/html/study.html"} Студия
-      %ul
-        %li
-          %a{:href => "/html/method.html"} Методики
-    %li
-      %a{:href => "/html/contact.html"} Контакты
-      %ul
-    %li#social
-      %a#vklink{:href => "http://vk.com/theatrestory"}
-        %img{:src => "/img/vk.png"}
-      %a#ytlink{:href => "https://www.youtube.com/channel/UCQZP1LIaXDODkQ7ciUL9Ugw"}
-        %img{:src => "/img/yt.png"}
+%ul
+  = map()
+  %li#social
+    %a#vklink{:href => "http://vk.com/theatrestory"}
+      %img{:src => "/img/vk.png"}
+    %a#ytlink{:href => "https://www.youtube.com/channel/UCQZP1LIaXDODkQ7ciUL9Ugw"}
+      %img{:src => "/img/yt.png"}
