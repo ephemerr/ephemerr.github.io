@@ -153,7 +153,7 @@ local function show(i)
         month,      day,        wday..' '..time,
         age,        about,      playname,
         station,    place,      addr;
-        --locals.page = "/html/playinfo.html#"..playid  //FIXME
+        locals.page = "/html/playinfo.html#"..playid --MOCK 
         return elem("playbill")
 end
 
@@ -192,7 +192,7 @@ function genpage(name)
     local _, title, section = ilements(page)
     locals.section = section
     locals.name = name
-    local template = section == "root" and "../haml/template_mock.haml" or "../haml/template_second.haml" --FIXME
+    local template = section == "root" and "../haml/template.haml" or "../haml/template_second.haml" --MOCK
     local rendered = engine:render_file(template, locals)
     return rendered
 end
