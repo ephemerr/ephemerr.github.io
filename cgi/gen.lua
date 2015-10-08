@@ -33,13 +33,6 @@ local sections = {
    { "contact"   , "Контакты"   },
 }
 
---local function dataload(name) 
---    local chunk = name .. "={"
---    chunk = chunk .. io.open("../data/"..name..".lua", "r"):read("*all")
---    chunk = chunk .. "}"
---    loadstring(chunk)()
---end
---
 local function dataload(name)
     local chunk = {}
     table.insert(chunk, name)
@@ -52,7 +45,7 @@ end
 
 dataload("shows")
 dataload("plays")
-dataload("playbill")
+dataload("stages")
 dataload("news")
 
 
@@ -68,7 +61,6 @@ local function next_fltr(fltr, from)
     local from = from or 0
     tab, col, val = ilements(fltr)
     for i = from+1,#tab do
-        print(tab[i][col]) 
         if tab[i][col] == val then return i, tab[i] end
     end
     return nil 
@@ -153,41 +145,35 @@ local function show(i)
         local _, month, day, wday, time, playid, stageid = ilements(shows[i])
         local _, play  = assert(next_fltr{plays, 1, playid})
         local _, stage = assert(next_fltr{stages, 1, stageid})
-        local _, playname, about, _, age = ilements(play)
+        local playid, playname, about, _, age = ilements(play)
         local _, station, place, addr = ilements(stage)
         locals.month,       locals.day,   locals.time,
         locals.age,         locals.about, locals.playname,
         locals.station,     locals.place, locals.addr  =
-        month,      day,        wday..time,
+        month,      day,        wday..' '..time,
         age,        about,      playname,
         station,    place,      addr;
+        --locals.page = "/html/playinfo.html#"..playid  //FIXME
         return elem("playbill")
 end
 
 locals.nextshow = function()
-    local i,s = next_fltr{shows, 1, 0}
+    local i = next_fltr{shows, 1, 0}
     return show(i)
 end
 
 locals.playbill = function(past, future)
-    if past > #playbill.past then past = #playbill.past end
-    if future > #playbill.future then future = #playbill.future end
-    max = max or 1
-    local res = {}
-    for i = 1 + #playbill.past - past, #playbill.past do
-        locals.month,       locals.day,   locals.time,
-        locals.age,         locals.about, locals.playname,
-        locals.station,     locals.place, locals.addr  = ilements(playbill.past[i])
-        table.insert(res, elem("playbill"))
-    end
-    for i = 1,future do
-        locals.month,       locals.day,   locals.time,
-        locals.age,         locals.about, locals.playname,
-        locals.station,     locals.place, locals.addr  = ilements(playbill.future[i])
-        table.insert(res, elem("playbill"))
+    local nexti = next_fltr{shows, 1, 0}
+    local from = nexti - past
+    from = from > 0 and from or 1
+    local til  = nexti + future-1
+    til = til < #shows and til or #shows
+    local res={}
+    for i = from,til do
+        table.insert(res,show(i))
     end
     return table.concat(res)
-end
+end    
 
 locals.playinfo = function()
     local res = {}
@@ -206,7 +192,7 @@ function genpage(name)
     local _, title, section = ilements(page)
     locals.section = section
     locals.name = name
-    local template = section == "root" and "../haml/template.haml" or "../haml/template_second.haml"
+    local template = section == "root" and "../haml/template_mock.haml" or "../haml/template_second.haml" --FIXME
     local rendered = engine:render_file(template, locals)
     return rendered
 end
