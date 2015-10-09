@@ -1,7 +1,6 @@
 #!/usr/bin/lua
 
-local inspect = require "inspect"
-local ser = require "serpent"
+--local inspect = require "inspect"
 
 module("gen",package.seeall)
 
