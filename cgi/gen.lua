@@ -144,7 +144,6 @@ end
 local function show(i)
         local _, month, day, wday, time, playid, stageid = ilements(shows[i])
         local _, play  = next_fltr{plays, 1, playid}
-        if not play then return "" end  -- show without play  
         local _, stage = assert(next_fltr{stages, 1, stageid})
         local playid, playname, about, _, age = ilements(play)
         local _, station, place, addr = ilements(stage)
@@ -179,10 +178,13 @@ end
 locals.playinfo = function()
     local res = {}
     for i=1,#plays do
-        locals.playname, locals.title, locals.short, locals.long   = ilements(plays[i])
-        locals.title = '"' .. locals.title .. '"'
-        locals.imgname = "playinfo/"..locals.playname.."/1"
-        table.insert(res, elem("playinfo"))
+        local status
+        locals.playname, locals.title, locals.short, locals.long, locals.age, status  = ilements(plays[i])
+        if status == 'alive' then 
+            locals.title = '"' .. locals.title .. '"'
+            locals.imgname = "playinfo/"..locals.playname.."/1"
+            table.insert(res, elem("playinfo"))
+        end
     end
     return table.concat(res)
 end
