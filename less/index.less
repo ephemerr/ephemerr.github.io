@@ -2,8 +2,8 @@
 /* CSS Document */
 
 @font-face {
-    font-family: Rupster Script; /* Гарнитура шрифта */
-    src: url("/font/Rupster Script.ttf"); /* Путь к файлу со шрифтом */
+    font-family: Rupster Script; 
+    src: url("/font/Rupster Script.ttf"); 
 }
 
 .zoomable {
@@ -55,7 +55,6 @@ body {
 	@color-a-white: #EEE1FF+#111;
 
 	@color-b: #B7DFFE;
-	//@color-b-dim: @color-b-condensed;
 	@color-b-dim: #8C9FAD;
 	@color-b-condensed: #25608D;
 	@color-b-bleak: #CFEAFF;
@@ -66,7 +65,6 @@ body {
 	@color-c-condensed: #8E7324;
 	@color-c-bleak: #FFF2CC;
 	@color-c-white: #FFF7DF;
-
 
 	@header-color: @color-main-dim;
 	@h1-color: @color-b-condensed;
@@ -79,14 +77,16 @@ body {
 	@study-fcolor: black;
 
 	@font-size: 16px;
-	font-family: monospace;
+    line-height: 1.4;
+	font-family: Arial, sans-serif;
 	font-size: @font-size;
 	min-width: 32em;
     max-width: 64em;
 	background-color: #bebefe;
-	margin: 1em auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
+	margin: 1em auto 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
 	color: #444;
 	overflow: scroll;
+    position: relative;
 
 	/* ~~ Element/tag selectors ~~ */
 	ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
@@ -101,6 +101,7 @@ body {
 		padding-left: 1em; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
         padding-top: 1em;
 	}
+
     p {
         padding: 0 1em 0 1em;
     }
@@ -146,6 +147,17 @@ body {
 				letter-spacing: normal;
 			}
 	}
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.3);
+        display: none;
+        z-index: 9;
+    }
 
 	.gohome {
 		text-align: center;

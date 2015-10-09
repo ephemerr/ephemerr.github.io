@@ -143,7 +143,8 @@ end
 
 local function show(i)
         local _, month, day, wday, time, playid, stageid = ilements(shows[i])
-        local _, play  = assert(next_fltr{plays, 1, playid})
+        local _, play  = next_fltr{plays, 1, playid}
+        if not play then return "" end  -- show without play  
         local _, stage = assert(next_fltr{stages, 1, stageid})
         local playid, playname, about, _, age = ilements(play)
         local _, station, place, addr = ilements(stage)
