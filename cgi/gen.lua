@@ -194,8 +194,7 @@ function genpage(name)
     local _, title, section = ilements(page)
     locals.section = section
     locals.name = name
-    local template = section == "root" and "../haml/template.haml" or "../haml/template_second.haml" --MOCK
-    local rendered = engine:render_file(template, locals)
+    local rendered = section == "root" and haml("page") or haml("page2") --MOCK
     return rendered
 end
 
