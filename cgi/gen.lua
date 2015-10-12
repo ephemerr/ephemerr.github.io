@@ -14,7 +14,7 @@ local pages =  {
     {  "index"   , "Пустая страница", "root"   },
     {  "main"    , "Главная"        , "root"   },
     {  "error"   , "Не найдено"     , "root"   },
-    {  "theatre" , "О нас"        , "theatre"},
+    {  "theatre" , "О нас"          , "theatre"},
     {  "genre"   , "Жанр"           , "theatre"},
     {  "hist"    , "История"        , "theatre"},
     {  "rucov"   , "Руководитель"   , "theatre"},
@@ -75,18 +75,18 @@ locals.script = function(scriptname)
     return io.open("/js/"..scriptname..".js","r"):read("*all")
 end
 
-local function elem( el_name )
-    local el_haml = "../elem/" .. el_name .. ".haml"
+local function haml( el_name )
+    local el_haml = "../haml/" .. el_name .. ".haml"
     local res = engine:render_file(el_haml, locals)
     return res
 end
-locals.elem = elem
+locals.haml = haml
 
 local function img(imgname)
     locals.imgname = imgname
     locals.imgmini = "/img/".. imgname .. "_min.jpg"
     locals.imgmaxi = "/img/".. imgname .. "_max.jpg"
-    return elem("img")
+    return haml("img")
 end
 locals.img = img
 
@@ -100,7 +100,7 @@ locals.map = function()
         locals.s_title = title
         _,page = next_fltr{pages,1,locals.name}
         locals.current = page[3] == section and "current" or ""
-        table.insert(res, elem("section"))
+        table.insert(res, haml("section"))
     end
     locals.section = cur_section -- restore
     return table.concat(res)
@@ -113,7 +113,7 @@ locals.links = function()
         locals.file = "/html/"..name..".html"
         locals.title = title
         locals.current = locals.name == name and "current" or ""
-        table.insert(res, elem("links"))
+        table.insert(res, haml("links"))
     end
     return table.concat(res)
 end
@@ -135,7 +135,7 @@ locals.topnews = function(max)
     local res = {}
     for i=1,max do
         locals.date, locals.newshead, locals.newsbody = ilements(news[i])
-        table.insert(res, elem("news"))
+        table.insert(res, haml("news"))
     end
     return table.concat(res)
 end
@@ -153,7 +153,7 @@ local function show(i)
         age,        about,      playname,
         station,    place,      addr;
         locals.page = "/html/playinfo.html#"..playid --MOCK 
-        return elem("playbill")
+        return haml("playbill")
 end
 
 locals.nextshow = function()
@@ -182,7 +182,7 @@ locals.playinfo = function()
         if status == 'alive' then 
             locals.title = '"' .. locals.title .. '"'
             locals.imgname = "playinfo/"..locals.playname.."/1"
-            table.insert(res, elem("playinfo"))
+            table.insert(res, haml("playinfo"))
         end
     end
     return table.concat(res)
