@@ -20,9 +20,11 @@ local pages =  {
     {  "rucov"   , "Руководитель"   , "theatre"},
     {  "plays"   , "Афиша"          , "plays"  },
     {  "playinfo", "Репертуар"      , "plays"  },
-    {  "study"   , "Студия"         , "study"  },
+    {  "study"   , "Молодежная"     , "study"  },
+    {  "study"   , "Взрослая"       , ""  },
     {  "method"  , "Методики"       , ""  },
     {  "contact" , "Контакты"       , "contact"},
+    {  "addr"    , "Адреса"         , "contact"},
 }
 
 local sections = {

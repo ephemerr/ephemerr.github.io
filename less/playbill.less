@@ -1,7 +1,7 @@
 @color-main-dim: #8F8FAD;
 @color-main-bleak: #D3D3FF;
 @color-b-condensed: #25608D;
-
+@color-main-condensed: #26268D;
 
 .playbill {
     color: @color-main-dim;
@@ -40,11 +40,16 @@
         .playname {
             font-size: 150%;
             font-weight: bold;
+            a {
+                color: @color-main-dim;
+				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+					color: @color-main-condensed;
+				}
+            }
         }
     }
     .place_col {
-        .place {
-            
+        .place {            
         }
     }
 }
