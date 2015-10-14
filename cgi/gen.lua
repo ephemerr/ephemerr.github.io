@@ -14,7 +14,7 @@ local pages =  {
     {  "index"   , "Пустая страница", "root"   },
     {  "main"    , "Главная"        , "root"   },
     {  "error"   , "Не найдено"     , "root"   },
-    {  "theatre" , "О нас"          , "theatre"},
+    {  "theatre" , "Коротко"        , "theatre"},
     {  "genre"   , "Жанр"           , "theatre"},
     {  "hist"    , "История"        , "theatre"},
     {  "rucov"   , "Руководитель"   , "theatre"},
@@ -28,7 +28,7 @@ local pages =  {
 }
 
 local sections = {
-   { "theatre"   , "Театр"   },
+   { "theatre"   , "О нас"   },
    { "plays"     , "Спектакли"  },
    { "study"     , "Студия"     },
    { "contact"   , "Контакты"   },

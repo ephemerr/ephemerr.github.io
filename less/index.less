@@ -70,11 +70,12 @@ body {
 	@h1-color: @color-b-condensed;
 	@footer-fcolor: @color-main-dim;
 	@footer-color: @color-main;
+    @hoverlink-color: LightPink;
 
 	@news-color: white;
 	@news-fcolor: black;
 	@study-color: white;
-	@study-fcolor: black;
+	@study-fcolor: black;    
 
 	@font-size: 16px;
     line-height: 1.4;
@@ -126,7 +127,7 @@ body {
 		}
 		/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
         &:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-            color: @color-main-condensed;
+		    color: LightPink;//@color-main-condensed;
         }
 	}
 	a.more {
@@ -233,7 +234,7 @@ body {
 				width: auto;
 				padding: 0px 20px 0px 20px;
 				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-					color: @color-main-condensed;
+					color: LightPink; 
 				}
 			}
 			a.current {
@@ -242,7 +243,7 @@ body {
 				letter-spacing: normal;
 			}
             ul {
-                padding: 0 8em 0 8em;
+                padding: 0 0 1ex 0;
                 margin: 0;
                 display: inline-block;
                 position: relative;
@@ -258,15 +259,35 @@ body {
                     }
                     &:hover { 
                         //background: @color-c;
-                        border-radius: 8px 8px 0 0; 
+                        border-radius: 8px; 
                         ul {
+                            font-size: @font-size;
+                            text-align: left;                    
+                            //margin-top: 2ex;
+                            //background: linear-gradient(to bottom, white, @color-c-bleak);
+                            //background: white; 
                             border-radius: 8px; 
                             //display: block;
+		                    //box-shadow: 0 0 10px rgba(0,0,0,0.5);
                             li {
+                                display: block;
                                 padding: .1em;
                                 &:hover {
                                     background: @color-c-dim;
                                 }
+                            }
+                            &:after {
+                              display: none;
+                              content: '';
+                              position: absolute;
+                              width: 0;
+                              height: 0;
+                              border: 10px solid;
+                              left: 50%;
+                              bottom: 100%;
+                              margin-left: -5px;
+                              border-color: transparent;
+                              border-bottom-color: white;
                             }
                         }
                     }
@@ -296,7 +317,7 @@ body {
                     padding: 0 1em 0em 0em;
                     color: @color-main-dim;
                     &:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-                        color: @color-main-condensed;
+                        color: LightPink; 
                     }
                 }
                 ul {
