@@ -234,7 +234,6 @@ body {
 				letter-spacing: normal;
 			}
             ul {
-                padding: 0 0 1ex 0;
                 margin: 0;
                 display: inline-block;
                 position: relative;
@@ -243,7 +242,6 @@ body {
                     text-align: center;                    
                     display: inline-block;
                     ul {
-                        padding: 0;
 			            font-size: 90%;
                         position: absolute;
                         display: none;                        
@@ -252,19 +250,29 @@ body {
                         //background: @color-c;
                         border-radius: 8px; 
                         ul {
+                            padding: .5em;
+                            border-top-left-radius: 4em 1em;
+                            border-bottom-right-radius: 15em 1em;
+                            min-width: 8em;
+                            font-size: @font-size;
                             font-size: @font-size;
                             text-align: left;                    
                             //margin-top: 2ex;
-                            //background: linear-gradient(to bottom, white, @color-c-bleak);
-                            //background: white; 
-                            border-radius: 8px; 
-                            //display: block;
+                            background: linear-gradient(to bottom, @color-c, PeachPuff);
+                            //background: @color-c;
+                            border: 1px solid @color-c-bleak;
+                            //border-radius: 2px; 
+                            display: block;
 		                    //box-shadow: 0 0 10px rgba(0,0,0,0.5);
-                            li {
+                            li {                            
+                                text-align: left;                    
                                 display: block;
                                 padding: .1em;
                                 &:hover {
-                                    background: @color-c-dim;
+                                    //background: @color-c-dim;
+                                }
+                                a {
+                                    //color: white;
                                 }
                             }
                             &:after {
