@@ -70,7 +70,7 @@ body {
 	@h1-color: @color-b-condensed;
 	@footer-fcolor: @color-main-dim;
 	@footer-color: @color-main;
-    @hoverlink-color: LightPink;
+    @hoverlink-color:  Salmon;
 
 	@news-color: white;
 	@news-fcolor: black;
@@ -120,14 +120,15 @@ body {
 
 	a {
 		text-decoration: none;
-		color: @color-main-condensed;
+		color: @color-main-dim;
+        transition-duration: 0.5s;
 		border: none;
 		img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
 			border: none;
 		}
 		/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
         &:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-		    color: LightPink;//@color-main-condensed;
+		    color: @hoverlink-color;//@color-main-condensed;
         }
 	}
 	a.more {
@@ -141,12 +142,6 @@ body {
 			//border-top: 5px solid @color-c-bleak;
 			background: linear-gradient(to top, white, @color-c-bleak);
 			font-size: 110%;
-  		a {
-  			color: @color-b-dim;
-				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-					color: LightPink;//@color-main-condensed;
-				}
-  		}
 			a.current {
 				color: @color-b-condensed;
 				text-align: center;
@@ -169,9 +164,7 @@ body {
 		text-align: center;
 		margin: 1em auto;
         display: block;
-		    .gradline;
-        a {
-        }
+		.gradline;
 	}
 
 	/* ~~ this fixed width container surrounds the other divs ~~ */
@@ -228,14 +221,9 @@ body {
             line-height: 90%;
 			text-align: center;
 			a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
-				border: none;
 				text-align: center;
-				color: @header-color;
 				width: auto;
 				padding: 0px 20px 0px 20px;
-				&:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-					color: LightPink; 
-				}
 			}
 			a.current {
 				color: @color-b-condensed;
@@ -315,10 +303,6 @@ body {
                 font-weight: bold;
                 a {
                     padding: 0 1em 0em 0em;
-                    color: @color-main-dim;
-                    &:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-                        color: LightPink; 
-                    }
                 }
                 ul {
                     padding: .3em  0 0 0 ;
