@@ -3,29 +3,45 @@
 @color-b-condensed: #25608D;
 @color-main-condensed: #26268D;
 
+.column {
+        display: inline-block;
+        vertical-align: middle;
+}
+
 .playbill {
     color: @color-main-dim;
-    padding: 1em 1em 1em 1em;
     width: 100%;
-    text-align: center;    
-    td {
-      padding: 10px 0px 10px 0px;
-      border-top: .3em solid #eee;
-      border-bottom: .3em solid #eee;
+    display: inline-block;
+    margin: 1em auto;
+    text-align: center;
+    vertical-align: center;
+    border-top: .3em solid #eee;
+    div {
+      padding: 0;
+      //border: 1px solid black;
+      margin: 0;
+      div {
+        padding: 0 16px 0 0;        
+      }  
     }
     .time_col {
+        .column;
         width: 25%;
         .month {
+            vertical-align: bottom;
         }
         .day {
-            font-size: 400%;
+            font-size: 64px;
+            line-height: 64px;
             font-family: fantasy;
             font-weight: bold;
         }
         .time {
+            vertical-align: top;
         }
     }
     .title_col {
+        .column;
         width: 50%;
         .age {
             display: none;
@@ -43,7 +59,18 @@
         }
     }
     .place_col {
-        .place {            
+        .column;
+        div {
+            display: inline-block;
+        }
+    }
+}
+
+@media all and (min-width: 55em) {
+    .playbill .place_col {
+        display: inline-block;
+        div {
+            display: block;
         }
     }
 }

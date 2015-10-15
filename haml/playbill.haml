@@ -1,16 +1,15 @@
-%table.playbill{:border => "0", :cellspacing => "0", "text-align" => "center", :width => "100%"}
-  %tr
-    %td.time_col
-      .month= month
-      .day= day
-      .time=  time
-    %td.title_col
-      .age= age
-      .about= about
-      .playname
-        %a(href=page)
-          = playname
-    %td.place_col
-      .station= station
-      .place= place
-      .addr= addr
+.playbill
+  .time_col
+    .month= month
+    .day= day
+    .time=  time
+  .title_col
+    .age= age
+    .about= about
+    .playname
+      %a(href=page)
+        = playname
+  .place_col
+    .station= station
+    .place= place
+    .addr= addr
