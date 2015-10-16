@@ -232,13 +232,17 @@ body {
 				color: @color-b-condensed;
 				text-align: center;
 				letter-spacing: normal;
+                //background: rgba(99,99,99,0.1);
 			}
             ul {
                 margin: 0;
                 display: inline-block;
                 position: relative;
                 li {
-                    padding: 0;
+                    //border: 2px solid @color-main-dim;
+                    border-radius: 23px 23px 0 0 ;
+                    border-bottom: none;
+                    padding: .5em 0 0  0;
                     text-align: center;                    
                     display: inline-block;
                     ul {
@@ -247,8 +251,6 @@ body {
                         display: none;                        
                     }
                     &:hover { 
-                        //background: @color-c;
-                        border-radius: 8px; 
                         ul {
                             padding: .5em;
                             border-top-left-radius: 4em 1em;
@@ -265,6 +267,7 @@ body {
                             display: block;
 		                    //box-shadow: 0 0 10px rgba(0,0,0,0.5);
                             li {                            
+                                border: none;
                                 text-align: left;                    
                                 display: block;
                                 padding: .1em;
