@@ -2,13 +2,11 @@
   .time_col
     .month= month
     .day= day
-    .time=  time
+    .time=  weektime
   .title_col
     .age= age
     .about= about
-    .playname
-      %a(href=page)
-        = playname
+    .playname= playlabel()
   .place_col
     .station= station
     .place= place

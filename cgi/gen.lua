@@ -64,7 +64,7 @@ local function next_fltr(fltr, from)
     for i = from+1,#tab do
         if tab[i][col] == val then return i, tab[i] end
     end
-    return nil 
+    return nil
 end
 
 function pairs_fltr(tab, col, val)
@@ -142,19 +142,33 @@ locals.topnews = function(max)
     return table.concat(res)
 end
 
+locals.playlabel = function()
+        if locals.status == 'alive' then
+            locals.page =  "/html/playinfo.html#"..locals.playid
+            return haml('a')
+        else
+            return locals.text
+        end
+end
+
 local function show(i)
         local _, month, day, wday, time, playid, stageid = ilements(shows[i])
         local _, play  = next_fltr{plays, 1, playid}
         local _, stage = assert(next_fltr{stages, 1, stageid})
-        local playid, playname, about, _, age = ilements(play)
+        local playid, playname, about, _, age, status = ilements(play)
         local _, station, place, addr = ilements(stage)
-        locals.month,       locals.day,   locals.time,
-        locals.age,         locals.about, locals.playname,
-        locals.station,     locals.place, locals.addr  =
-        month,      day,        wday..' '..time,
-        age,        about,      playname,
-        station,    place,      addr;
-        locals.page = "/html/playinfo.html#"..playid --MOCK 
+        locals.month    =   month
+        locals.day      =   day
+        locals.weektime =   wday..' '..time
+        locals.age      =   age
+        locals.about    =   about
+        locals.playname =   playname
+        locals.station  =   station
+        locals.place    =   place
+        locals.addr     =   addr
+        locals.text     =   playname
+        locals.playid   =   playid
+        locals.status   =   status
         return haml("playbill")
 end
 
@@ -174,14 +188,14 @@ locals.playbill = function(past, future)
         table.insert(res,show(i))
     end
     return table.concat(res)
-end    
+end
 
 locals.playinfo = function()
     local res = {}
     for i=1,#plays do
         local status
         locals.playname, locals.title, locals.short, locals.long, locals.age, status  = ilements(plays[i])
-        if status == 'alive' then 
+        if status == 'alive' then
             locals.title = '"' .. locals.title .. '"'
             locals.imgname = "playinfo/"..locals.playname.."/1"
             table.insert(res, haml("playinfo"))
