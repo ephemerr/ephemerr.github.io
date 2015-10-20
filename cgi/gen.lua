@@ -7,6 +7,12 @@ module("gen",package.seeall)
 local haml         = require "haml"
 local options      = {format = "html5"}
 local engine       = haml.new(options)
+
+local tools        = require "atools"
+local ilements     = tools.ilements   
+local next_fltr    = tools.next_fltr 
+local pairs_fltr   = tools.pairs_fltr
+
 local locals = {}
 
 --    [1] pagename  [2] title        [3] parent
@@ -50,26 +56,6 @@ dataload("stages")
 dataload("news")
 
 
----- UTILS
-
-function ilements(tab, from)
-    local from = from or 1
-    if not tab[from] then return end
-    return tab[from], ilements(tab,from+1)
-end
-
-local function next_fltr(fltr, from)
-    local from = from or 0
-    tab, col, val = ilements(fltr)
-    for i = from+1,#tab do
-        if tab[i][col] == val then return i, tab[i] end
-    end
-    return nil
-end
-
-function pairs_fltr(tab, col, val)
-    return next_fltr, {tab, col, val}, 0
-end
 
 ---- API
 
