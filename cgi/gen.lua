@@ -137,6 +137,19 @@ locals.playlabel = function()
         end
 end
 
+locals.places = function()
+    res={}
+    for i=1,#stages do
+        local stageid, station, place, addr = ilements(stages[i])
+        locals.station = station 
+        locals.place   = place   
+        locals.addr    = addr    
+        locals.placemap = "/img/stages/"..stageid..".jpg" 
+        table.insert(res, haml("addr"))
+    end
+    return table.concat(res)
+end
+
 local function show(i)
         local _, month, day, wday, time, playid, stageid = ilements(shows[i])
         local _, play  = next_fltr{plays, 1, playid}
