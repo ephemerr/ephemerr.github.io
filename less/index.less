@@ -222,7 +222,7 @@ html {
             /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
             #nav {
                 min-width: 320px;
-                padding: .1em  0 2em 0;
+                padding: 0 0 2em 0;
                 font-size: 110%;
                 line-height: 90%;
                 text-align: center;
@@ -238,6 +238,9 @@ html {
                     //background: rgba(99,99,99,0.1);
                 }
                 ul {
+                    div {
+                        display: inline-block;
+                    }
                     margin: 0;
                     display: inline-block;
                     position: relative;
@@ -245,7 +248,7 @@ html {
                         //border: 2px solid @color-main-dim;
                         border-radius: 23px 23px 0 0 ;
                         border-bottom: none;
-                        padding: .5em 0 0  0;
+                        padding: .7em 0 0  0;
                         text-align: center;
                         display: inline-block;
                         ul {
@@ -303,14 +306,16 @@ html {
             background: white;
         }
         footer {
-            text-align: center;
             background: linear-gradient(to bottom, white, @color-main); //@footer-color;
+            text-align: center;
 
             padding: 2ex 10px 30px 10px;
             ul {
-                display: inline;
-                text-align: left;
+                div {
+                    display: inline-block;
+                }
                 li {
+                    padding-top: 1em;
                     pointer-events: none;
                     vertical-align: top;
                     text-align: left;
@@ -325,25 +330,28 @@ html {
                         font-size: @font-size;
                         text-align: left;
                         li {
+                            padding: 0;
                             font-weight: normal;
                             pointer-events: auto;
                             display: block;
                         }
                     }
                 }
-                #social {
-                    a {
-                        pointer-events: auto;
-                        text-decoration: none;
-                        padding: 0;
-                        margin: 0;
-                    }
-                    padding: 1em 0em 0 3em;
-                    img {
-                        width: 32px;
-                        box-shadow: none;
-                        margin: 3px;
-                    }
+            }
+            #social {
+                display: block;
+                a {
+                    pointer-events: auto;
+                    text-decoration: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                img {
+                    width: 32px;
+                    box-shadow: none;
+                    margin: 3px;
+                    margin-top: 30px;
+
                 }
             }
         }

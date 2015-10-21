@@ -82,6 +82,7 @@ locals.map = function()
     local res = {}
     local cur_section = locals.section
     for k,v in pairs(sections) do
+        if k % 2 == 1 then table.insert(res,'\n<div>\n') end 
         local section,title = ilements(v)
         locals.section = section
         locals.s_file = "/html/"..section..".html"
@@ -89,6 +90,7 @@ locals.map = function()
         _,page = next_fltr{pages,1,locals.name}
         locals.current = page[3] == section and "current" or ""
         table.insert(res, haml("section"))
+        if k % 2 == 0 then table.insert(res,'\n</div>\n') end 
     end
     locals.section = cur_section -- restore
     return table.concat(res)
