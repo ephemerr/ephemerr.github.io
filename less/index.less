@@ -43,9 +43,6 @@
 
 html {
 	background-color: #bebefe;
-}
-
-body {
 	@color-main: #bebefe;
 	@color-main-dim: #8F8FAD;
 	@color-main-condensed: #26268D;
@@ -82,272 +79,274 @@ body {
 	@study-fcolor: black;
 
 	@font-size: 16px;
-    line-height: 1.4;
-	font-family: Arial, sans-serif;
-	font-size: @font-size;
-	min-width: 320px;
-    max-width: 64em;
-	margin: 1em auto 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
-	color: #444;
-	overflow: scroll;
-    position: relative;
 
-	/* ~~ Element/tag selectors ~~ */
-	ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
-		padding: 0;
-		margin: 0;
-	}
+    body {
+        line-height: 1.4;
+        font-family: Arial, sans-serif;
+        font-size: @font-size;
+        min-width: 320px;
+        max-width: 64em;
+        margin: 1em auto 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+        color: #444;
+        overflow: scroll;
+        position: relative;
 
-	h1, h2, h3, h4, h5, h6 {
-    color: @h1-color;
-		margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
-		padding-right: 1em;
-		padding-left: 1em; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
-        padding-top: 1em;
-	}
-
-    .def {
-        display: inline;
-        border-bottom: 1px dotted #444;
-    }
-    p {
-        padding: 0 1em 0 1em;
-    }
-
-	h2 {
-		text-align: center;
-		padding-top: 1.5em;
-	}
-
-	img {
-		width: inherit;
-		box-shadow: 0 0 15px @color-c-condensed;
-		margin: 1em;
-	}
-
-	a {
-		text-decoration: none;
-		color: @color-main-dim;
-        transition-duration: 0.5s;
-		border: none;
-		img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
-			border: none;
-		}
-		/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
-        &:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-		    color: @hoverlink-color;//@color-main-condensed;
+        /* ~~ Element/tag selectors ~~ */
+        ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+            padding: 0;
+            margin: 0;
         }
-	}
-	a.more {
-		float: right;
-		font-size: @font-size -1px;
-		padding-bottom: 1em;
-	}
-	.gradline {
-			//width: 60%;
-            padding: .5em .5em .0em .5em;
-			//border-top: 5px solid @color-c-bleak;
-			background: linear-gradient(to top, white, @color-c-bleak);
-			font-size: 110%;
-			a.current {
-				color: @color-b-condensed;
-				text-align: center;
-				letter-spacing: normal;
-			}
-	}
 
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.3);
-        display: none;
-        z-index: 9;
-    }
+        h1, h2, h3, h4, h5, h6 {
+        color: @h1-color;
+            margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+            padding-right: 1em;
+            padding-left: 1em; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+            padding-top: 1em;
+        }
 
-	.gohome {
-		text-align: center;
-		margin: 1em auto;
-        display: block;
-		.gradline;
-	}
+        .def {
+            display: inline;
+            border-bottom: 1px dotted #444;
+        }
+        p {
+            padding: 0 1em 0 1em;
+        }
 
-	/* ~~ this fixed width container surrounds the other divs ~~ */
-	.container {
-		left: 0px;
-		margin: 0px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
-		padding: 1em 2em 1em 2em;
-		h1 {
-			.gradline;
-			text-align: left;
- 			font-weight: normal;
-		}
-		p {
-			text-align: left;
-			text-indent: 0em;
-		}
-	}
-	.err404 {
-		color: @color-main-dim;
-		background: @color-main-white;
-		font-size: 40px;
-		text-align: center;
-		font-family: fantasy;
-	}
-	.links {
-		text-align: center;
-		ul {
-			.gradline;
-			width: auto;
-			li {
-				padding-left: 2em;
-				display: inline-block;
-			}
-		}
-	}
+        h2 {
+            text-align: center;
+            padding-top: 1.5em;
+        }
 
-	header {
-		text-align: center;
-		background: linear-gradient(to top, #fefcea, @color-main);
-		color: @header-color;
-		#site-name {
-		    font-family: 'Rupster Script', sans-serif;
-			a {
-				color: @color-main-dim;
-			}
-			font-size: @font-size*3;
-			font-weight: normal;
-		}
-	    /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
-		#nav {
-            min-width: 320px;
-			height: 7ex;
-			font-size: 130%;
-            line-height: 90%;
-			text-align: center;
-			a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
-				text-align: center;
-				width: auto;
-				padding: 0px 20px 0px 20px;
-			}
-			a.current {
-				color: @color-b-condensed;
-				text-align: center;
-				letter-spacing: normal;
-                //background: rgba(99,99,99,0.1);
-			}
-            ul {
-                margin: 0;
-                display: inline-block;
-                position: relative;
-                li {
-                    //border: 2px solid @color-main-dim;
-                    border-radius: 23px 23px 0 0 ;
-                    border-bottom: none;
-                    padding: .5em 0 0  0;
+        img {
+            width: inherit;
+            box-shadow: 0 0 15px @color-c-condensed;
+            margin: 1em;
+        }
+
+        a {
+            text-decoration: none;
+            color: @color-main-dim;
+            transition-duration: 0.5s;
+            border: none;
+            img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+                border: none;
+            }
+            /* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+            &:hover, &:active, &:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+                color: @hoverlink-color;//@color-main-condensed;
+            }
+        }
+        a.more {
+            float: right;
+            font-size: @font-size -1px;
+            padding-bottom: 1em;
+        }
+        .gradline {
+                //width: 60%;
+                padding: .5em .5em .0em .5em;
+                //border-top: 5px solid @color-c-bleak;
+                background: linear-gradient(to top, white, @color-c-bleak);
+                font-size: 110%;
+                a.current {
+                    color: @color-b-condensed;
                     text-align: center;
+                    letter-spacing: normal;
+                }
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: none;
+            z-index: 9;
+        }
+
+        .gohome {
+            text-align: center;
+            margin: 1em auto;
+            display: block;
+            .gradline;
+        }
+
+        /* ~~ this fixed width container surrounds the other divs ~~ */
+        .container {
+            left: 0px;
+            margin: 0px auto 0px auto; /* the auto value on the sides, coupled with the width, centers the layout */
+            padding: 1em 2em 1em 2em;
+            h1 {
+                .gradline;
+                text-align: left;
+                font-weight: normal;
+            }
+            p {
+                text-align: left;
+                text-indent: 0em;
+            }
+        }
+        .err404 {
+            color: @color-main-dim;
+            background: @color-main-white;
+            font-size: 40px;
+            text-align: center;
+            font-family: fantasy;
+        }
+        .links {
+            text-align: center;
+            ul {
+                .gradline;
+                width: auto;
+                li {
+                    padding-left: 2em;
                     display: inline-block;
-                    ul {
-			            font-size: 90%;
-                        position: absolute;
-                        display: none;
-                    }
-                    &:hover {
+                }
+            }
+        }
+
+        header {
+            text-align: center;
+            background: linear-gradient(to top, #fefcea, @color-main);
+            color: @header-color;
+            #site-name {
+                font-family: 'Rupster Script', sans-serif;
+                a {
+                    color: @color-main-dim;
+                }
+                font-size: @font-size*3;
+                font-weight: normal;
+            }
+            /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
+            #nav {
+                min-width: 320px;
+                height: 7ex;
+                font-size: 130%;
+                line-height: 90%;
+                text-align: center;
+                a, a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
+                    text-align: center;
+                    width: auto;
+                    padding: 0px 20px 0px 20px;
+                }
+                a.current {
+                    color: @color-b-condensed;
+                    text-align: center;
+                    letter-spacing: normal;
+                    //background: rgba(99,99,99,0.1);
+                }
+                ul {
+                    margin: 0;
+                    display: inline-block;
+                    position: relative;
+                    li {
+                        //border: 2px solid @color-main-dim;
+                        border-radius: 23px 23px 0 0 ;
+                        border-bottom: none;
+                        padding: .5em 0 0  0;
+                        text-align: center;
+                        display: inline-block;
                         ul {
-                            padding: .5em;
-                            //border-top-left-radius: 4em 1em;
-                            //border-bottom-right-radius: 15em 1em;
-                            min-width: 8em;
-                            font-size: @font-size;
-                            text-align: left;
-                            //margin-top: 2ex;
-                            //background: linear-gradient(to top, @color-b-bleak,white);
-                            background: white;
-                            //border: px solid @color-main;
-                            //border-right: 1px solid @color-b-bleak;
-                            //border-radius: 2px;
-                            display: block;
-		                    box-shadow: 0 0 10px rgba(0,0,100,0.5);
-                            li {
-                                border: none;
+                            font-size: 90%;
+                            position: absolute;
+                            display: none;
+                        }
+                        &:hover {
+                            ul {
+                                padding: .5em;
+                                //border-top-left-radius: 4em 1em;
+                                //border-bottom-right-radius: 15em 1em;
+                                min-width: 8em;
+                                font-size: @font-size;
                                 text-align: left;
+                                //margin-top: 2ex;
+                                //background: linear-gradient(to top, @color-b-bleak,white);
+                                background: white;
+                                //border: px solid @color-main;
+                                //border-right: 1px solid @color-b-bleak;
+                                //border-radius: 2px;
                                 display: block;
-                                padding: .1em;
-                                &:hover {
-                                    //background: @color-c-dim;
+                                box-shadow: 0 0 10px rgba(0,0,100,0.5);
+                                li {
+                                    border: none;
+                                    text-align: left;
+                                    display: block;
+                                    padding: .1em;
+                                    &:hover {
+                                        //background: @color-c-dim;
+                                    }
+                                    a {
+                                        //color: white;
+                                    }
                                 }
-                                a {
-                                    //color: white;
+                                &:after {
+                                  display: none;
+                                  content: '';
+                                  position: absolute;
+                                  width: 0;
+                                  height: 0;
+                                  border: 10px solid;
+                                  left: 50%;
+                                  bottom: 100%;
+                                  margin-left: -5px;
+                                  border-color: transparent;
+                                  border-bottom-color: white;
                                 }
-                            }
-                            &:after {
-                              display: none;
-                              content: '';
-                              position: absolute;
-                              width: 0;
-                              height: 0;
-                              border: 10px solid;
-                              left: 50%;
-                              bottom: 100%;
-                              margin-left: -5px;
-                              border-color: transparent;
-                              border-bottom-color: white;
                             }
                         }
                     }
                 }
             }
-		}
-	}
-	.content {
-		background: white;
-	}
-	footer {
-		text-align: center;
-		font-size: 105%;
-		min-height: @font-size*5;
-		background: linear-gradient(to bottom, white, @color-main); //@footer-color;
+        }
+        .content {
+            background: white;
+        }
+        footer {
+            text-align: center;
+            font-size: 105%;
+            min-height: @font-size*5;
+            background: linear-gradient(to bottom, white, @color-main); //@footer-color;
 
-		padding: 2ex 10px 30px 10px;
-        ul {
-            li {
-                pointer-events: none;
-                vertical-align: top;
-                text-align: left;
-                width: auto;
-                display: inline-block;
-                font-weight: bold;
-                a {
-                    padding: 0 1em 0em 0em;
-                }
-                ul {
-                    padding: .3em  0 0 0 ;
-                    font-size: @font-size;
+            padding: 2ex 10px 30px 10px;
+            ul {
+                li {
+                    pointer-events: none;
+                    vertical-align: top;
                     text-align: left;
-                    li {
-                        font-weight: normal;
+                    width: auto;
+                    display: inline-block;
+                    font-weight: bold;
+                    a {
+                        padding: 0 1em 0em 0em;
+                    }
+                    ul {
+                        padding: .3em  0 0 0 ;
+                        font-size: @font-size;
+                        text-align: left;
+                        li {
+                            font-weight: normal;
+                            pointer-events: auto;
+                            display: block;
+                        }
+                    }
+                }
+                #social {
+                    a {
                         pointer-events: auto;
-                        display: block;
+                        text-decoration: none;
+                        padding: 0;
+                        margin: 0;
+                    }
+                    padding: 1em 0em 0 3em;
+                    img {
+                        width: 32px;
+                        box-shadow: none;
+                        margin: 3px;
                     }
                 }
             }
-            #social {
-                a {
-                    pointer-events: auto;
-                    text-decoration: none;
-                    padding: 0;
-                    margin: 0;
-                }
-                padding: 1em 0em 0 3em;
-                img {
-                    width: 32px;
-                    box-shadow: none;
-                    margin: 3px;
-                }
-            }
         }
-	}
+    }
 }
-
