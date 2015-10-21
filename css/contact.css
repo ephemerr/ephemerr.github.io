@@ -1,1 +1,1 @@
-#contact{text-align:center}#contact table{text-align:left;width:auto;margin:0 auto 0 auto}#contact table td{padding:0em 1em 1em 1em}
+#contact .table{text-align:center;width:auto;margin:0 auto 0 auto}#contact .table .tr{display:inline}#contact .table .tr .td{text-align:left;min-width:40%;display:inline-block;padding:0em 1em 1em 1em}
