@@ -1,5 +1,5 @@
-drop database IF EXISTS theater;
-create database theater CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+DROP DATABASE IF EXISTS theater;
+CREATE DATABASE theater CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 USE theater;
 
 CREATE TABLE person (
@@ -10,7 +10,7 @@ CREATE TABLE person (
 
 CREATE TABLE `play` (
 	`id` VARCHAR(20) NOT NULL UNIQUE, 
-    `title` VARCHAR(255) NOT NULL UNIQUE, 
+    `title` TEXT NOT NULL UNIQUE, 
     `author` VARCHAR(255) NOT NULL, 
     `descr` TEXT NOT NULL, 
     `age` CHAR(5), 
@@ -41,6 +41,7 @@ LOAD DATA INFILE '/home/azzel/soft/ephemerr.github.io/data/plays.csv' INTO TABLE
 LOAD DATA INFILE '/home/azzel/soft/ephemerr.github.io/data/stages.csv' INTO TABLE `stage` FIELDS OPTIONALLY ENCLOSED BY '\'' TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
 LOAD DATA INFILE '/home/azzel/soft/ephemerr.github.io/data/shows.csv' INTO TABLE `show` FIELDS OPTIONALLY ENCLOSED BY '\'' TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
     
+USE theater;
 SELECT 
   play.title,
   play.author,
