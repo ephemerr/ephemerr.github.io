@@ -56,7 +56,7 @@ wday = {
     Sat = 'Сб'
 }
 
-local function mnum(mname)
+function mnum(mname)
     for i = 1,#month do
         if month[i] == mname then return i end
     end
@@ -87,6 +87,5 @@ function day_of_week(dd, mm, yy)
 
   return dw, days[dw]
 end
-
 
 return _M

@@ -3,12 +3,12 @@ CREATE DATABASE theater CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 USE theater;
 
 CREATE TABLE person (
-    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `name` CHAR(70) NOT NULL,
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name CHAR(70) NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE `play` (
+CREATE TABLE play (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	short VARCHAR(20) NOT NULL UNIQUE,
     title TEXT(4096) NOT NULL,
@@ -19,16 +19,16 @@ CREATE TABLE `play` (
     premiere DATE,
     creator VARCHAR(255),
     PRIMARY KEY (id)
-) CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+);
 
-CREATE TABLE `stage` (
+CREATE TABLE stage (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	short VARCHAR(20) NOT NULL UNIQUE,
     station VARCHAR(255),
     place VARCHAR(255) NOT NULL,
     addr VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY (id)
-) CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+);
 
 CREATE TABLE `show`(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -37,23 +37,34 @@ CREATE TABLE `show`(
     `date` DATE NOT NULL,
     `time` TIME NOT NULL,
     PRIMARY KEY (id)
-) CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+);
 
-LOAD DATA INFILE '/home/azzel/soft/ephemerr.github.io/data/plays.csv'
+CREATE TABLE news (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `date` DATE NOT NULL,
+    `text` VARCHAR(512) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+LOAD DATA INFILE '/home/azzel/soft/ephemerr.github.io/sql/plays.csv'
 INTO TABLE `play`
 FIELDS OPTIONALLY ENCLOSED BY '\'' TERMINATED BY ','
 LINES TERMINATED BY '\n' IGNORE 1 LINES;
 
-LOAD DATA INFILE '/home/azzel/soft/ephemerr.github.io/data/stages.csv'
+LOAD DATA INFILE '/home/azzel/soft/ephemerr.github.io/sql/stages.csv'
 INTO TABLE `stage`
 FIELDS OPTIONALLY ENCLOSED BY '\'' TERMINATED BY ','
 LINES TERMINATED BY '\n' IGNORE 1 LINES;
 
-LOAD DATA INFILE '/home/azzel/soft/ephemerr.github.io/data/shows.csv'
+LOAD DATA INFILE '/home/azzel/soft/ephemerr.github.io/sql/shows.csv'
 INTO TABLE `show`
 FIELDS OPTIONALLY ENCLOSED BY '\'' TERMINATED BY ','
 LINES TERMINATED BY '\n' IGNORE 1 LINES;
 
+LOAD DATA INFILE '/home/azzel/soft/ephemerr.github.io/sql/news.csv'
+INTO TABLE `news`
+FIELDS OPTIONALLY ENCLOSED BY '\'' TERMINATED BY ','
+LINES TERMINATED BY '\n' IGNORE 1 LINES;
 
 CREATE VIEW playbill AS SELECT
     play.short as playid,
@@ -91,3 +102,17 @@ CREATE VIEW playinfo AS SELECT
     FROM play 
     WHERE play.isalive = 1
 ; 
+
+CREATE VIEW places AS SELECT
+    short as stageid, 
+    station, 
+    place, 
+    addr
+    FROM stage
+;
+
+CREATE VIEW topnews AS SELECT
+    DATE_FORMAT (`date`, "%e.%m.%Y") as date,
+    text
+    FROM news
+;

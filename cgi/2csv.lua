@@ -20,16 +20,16 @@ dataload("plays")
 dataload("stages")
 dataload("news")
 
-local out = io.open("../data/shows.csv","w");
+local out = io.open("../sql/shows.csv","w");
 out:write("id,stage,play,date,time\n")
 for i = 1,#shows do
     local id, month, day, wday, time, playid, stageid = unpack(shows[i])
-    local line = string.format("%d,%s,%s,2015-%d-%d,%s\n",i,playid,stageid,mnum(month),day,time)
+    local line = string.format("%d,%s,%s,2015-%d-%d,%s\n",i,playid,stageid,tools.mnum(month),day,time)
     out:write(line)
 end
 
 io.close(out)
-out = io.open("../data/plays.csv","w");
+out = io.open("../sql/plays.csv","w");
 out:write("id,short,title,author,descr,age,isalive,premiere,creator\n")
 for i = 1,#plays do
     local playid, playname, about, descr, age, status = unpack(plays[i])
@@ -38,10 +38,19 @@ for i = 1,#plays do
 end
 
 io.close(out)
-out = io.open("../data/stages.csv","w");
+out = io.open("../sql/stages.csv","w");
 out:write("id,short,station,place,addr\n")
 for i = 1,#stages do
     local id, station, place, addr = unpack(stages[i])
     local line = string.format("%d,%s,'%s','%s','%s'\n",i,id,station,place,addr )
+    out:write(line)
+end
+
+io.close(out)
+out = io.open("../sql/news.csv","w");
+out:write("id,data,text\n")
+for i = 1,#news do
+    local data, text = unpack(news[i])
+    local line = string.format("%d,%s,'%s'\n",i,data,text )
     out:write(line)
 end

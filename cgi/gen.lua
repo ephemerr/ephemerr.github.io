@@ -44,22 +44,7 @@ local sections = {
    { "contact"   , "Контакты"   },
 }
 
-local function dataload(name)
-    local chunk = {}
-    table.insert(chunk, name)
-    table.insert(chunk, "={")
-    table.insert(chunk, io.open("../data/"..name..".lua", "r"):read("*all"))
-    table.insert(chunk, "}")
-    chunk=table.concat(chunk)
-    loadstring(chunk)()
-end
-
---dataload("shows")
-dataload("plays")
-dataload("stages")
-dataload("news")
-
-local function query(name)
+local function sqlview(name)
     return "SELECT * FROM "..name..";";
 end
 
@@ -129,22 +114,19 @@ end
 
 locals.topnews = function(max)
     local res = {}
+    local cursor = assert(mysql:execute(sqlview("topnews")))
     for i=1,max do
-        locals.date, locals.newshead, locals.newsbody = unpack(news[i])
+        if not cursor:fetch(locals, "a") then break end
         table.insert(res, haml("news"))
     end
     return table.concat(res)
 end
 
 locals.places = function()
-    res={}
-    for i=1,#stages do
-        local stageid, station, place, addr = unpack(stages[i])
-        locals.station = station
-        locals.place   = place
-        locals.addr    = addr
-        locals.stageid = stageid
-        locals.placemap = "/img/stages/"..stageid..".jpg"
+    local res={}
+    local cursor = assert(mysql:execute(sqlview("places")))
+    while cursor:fetch(locals, "a") do
+        locals.placemap = "/img/stages/"..locals.stageid..".jpg"
         table.insert(res, haml("addr"))
     end
     return table.concat(res)
@@ -168,14 +150,14 @@ local function playbill()
 end
 
 locals.nextshow = function()
-    local cursor = assert(mysql:execute(query("nextshow")))
+    local cursor = assert(mysql:execute(sqlview("nextshow")))
     if cursor:fetch(locals, "a") then
         return playbill()
     end
 end
 
 locals.playbill = function()
-    local cursor = assert(mysql:execute(query("playbill")))
+    local cursor = assert(mysql:execute(sqlview("playbill")))
     local res={}
     while cursor:fetch(locals, "a") do
         table.insert(res,playbill())
@@ -184,7 +166,7 @@ locals.playbill = function()
 end
 
 locals.playinfo = function()
-    local cursor = assert(mysql:execute(query("playinfo")))
+    local cursor = assert(mysql:execute(sqlview("playinfo")))
     local res = {}
     while cursor:fetch(locals, "a") do
         locals.label = '"' .. locals.label .. '"'
