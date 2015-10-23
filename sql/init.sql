@@ -54,3 +54,40 @@ INTO TABLE `show`
 FIELDS OPTIONALLY ENCLOSED BY '\'' TERMINATED BY ','
 LINES TERMINATED BY '\n' IGNORE 1 LINES;
 
+
+CREATE VIEW playbill AS SELECT
+    play.short as playid,
+    play.title,
+    play.author,
+    play.age,
+    play.isalive,
+    stage.station,
+    stage.place,
+    stage.addr,
+    stage.short as stageid,
+    `show`.`date`,
+    DATE_FORMAT (`show`.`date`, "%a") as weekday,
+    DATE_FORMAT (`show`.`date`, "%e") as day,
+    DATE_FORMAT (`show`.`date`, "%M") as month,
+    TIME_FORMAT (`show`.`time`, "%k:%i") as time
+    FROM
+      `show`
+      JOIN
+          (play,stage)
+          ON (`show`.stage = stage.short  AND  `show`.play = play.short)
+;
+
+CREATE VIEW nextshow AS SELECT * FROM playbill
+    WHERE playbill.`date` >= CURRENT_DATE()
+    LIMIT 1
+;
+
+CREATE VIEW playinfo AS SELECT
+    play.short,
+    play.title as label,
+    play.author,
+    play.descr,
+    play.age
+    FROM play 
+    WHERE play.isalive = 1
+; 

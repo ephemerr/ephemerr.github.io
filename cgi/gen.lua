@@ -1,6 +1,6 @@
 #!/usr/bin/lua
 
---local inspect = require "inspect"
+local inspect = require "inspect"
 
 module("gen",package.seeall)
 
@@ -54,13 +54,13 @@ local function dataload(name)
     loadstring(chunk)()
 end
 
-dataload("shows")
+--dataload("shows")
 dataload("plays")
 dataload("stages")
 dataload("news")
 
 local function query(name)
-    return io.open("../sql/"..name..".sql","r"):read("*all")
+    return "SELECT * FROM "..name..";";
 end
 
 ---- API
@@ -136,15 +136,6 @@ locals.topnews = function(max)
     return table.concat(res)
 end
 
-locals.playlabel = function()
-        if locals.status == '1' then
-            locals.page =  "/html/playinfo.html#"..locals.playid
-            return haml('a')
-        else
-            return locals.text
-        end
-end
-
 locals.places = function()
     res={}
     for i=1,#stages do
@@ -159,55 +150,46 @@ locals.places = function()
     return table.concat(res)
 end
 
-local function playbill(
-        playid, title, author, age, status, 
-        station, place, addr, stageid, 
-        wday, day, month,time)
-    if not title then return nil end
-    local wday      =   tools.wday[wday]
-    locals.month    =   tools.month[month]
-    locals.day      =   day
-    locals.weektime =   wday..' '.. time
-    locals.age      =   age
-    locals.about    =   author
-    locals.playname =   title
-    locals.station  =   station
-    locals.place    =   place
-    locals.addr     =   addr
-    locals.text     =   title
-    locals.playid   =   playid
-    locals.status   =   status
-    locals.stage    =   "/html/addr.html#"..stageid
+locals.playlabel = function()
+        if locals.isalive == '1' then
+            locals.page =  "/html/playinfo.html#"..locals.playid
+            return haml('a')
+        else
+            return locals.text
+        end
+end
+
+local function playbill()
+    locals.month    =   tools.month[locals.month]
+    locals.weektime =   tools.wday[locals.weekday]..' '.. locals.time
+    locals.text     =   locals.title
+    locals.stage    =   "/html/addr.html#"..locals.stageid
     return haml("playbill")
 end
 
 locals.nextshow = function()
     local cursor = assert(mysql:execute(query("nextshow")))
-    return playbill(cursor:fetch())
+    if cursor:fetch(locals, "a") then
+        return playbill()
+    end
 end
 
 locals.playbill = function()
     local cursor = assert(mysql:execute(query("playbill")))
     local res={}
-    local show = playbill(cursor:fetch())
-    while show do
-        table.insert(res,show)
-        t= {}
-        show = playbill(cursor:fetch())
+    while cursor:fetch(locals, "a") do
+        table.insert(res,playbill())
     end
     return table.concat(res)
 end
 
 locals.playinfo = function()
+    local cursor = assert(mysql:execute(query("playinfo")))
     local res = {}
-    for i=1,#plays do
-        local status
-        locals.playname, locals.title, locals.short, locals.long, locals.age, status  = unpack(plays[i])
-        if status == 'alive' then
-            locals.title = '"' .. locals.title .. '"'
-            locals.imgname = "playinfo/"..locals.playname.."/1"
-            table.insert(res, haml("playinfo"))
-        end
+    while cursor:fetch(locals, "a") do
+        locals.label = '"' .. locals.label .. '"'
+        locals.imgname = "playinfo/"..locals.short .."/1"
+        table.insert(res, haml("playinfo"))
     end
     return table.concat(res)
 end
