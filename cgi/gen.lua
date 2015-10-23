@@ -146,6 +146,7 @@ locals.places = function()
         locals.station = station 
         locals.place   = place   
         locals.addr    = addr    
+        locals.stageid = stageid
         locals.placemap = "/img/stages/"..stageid..".jpg" 
         table.insert(res, haml("addr"))
     end
@@ -157,7 +158,7 @@ local function show(i)
         local _, play  = next_fltr{plays, 1, playid}
         local _, stage = assert(next_fltr{stages, 1, stageid})
         local playid, playname, about, _, age, status = ilements(play)
-        local _, station, place, addr = ilements(stage)
+        local stageid, station, place, addr = ilements(stage)
         locals.month    =   month
         locals.day      =   day
         locals.weektime =   wday..' '..time
@@ -170,6 +171,7 @@ local function show(i)
         locals.text     =   playname
         locals.playid   =   playid
         locals.status   =   status
+        locals.stage    =   "/html/addr.html#"..stageid
         return haml("playbill")
 end
 
