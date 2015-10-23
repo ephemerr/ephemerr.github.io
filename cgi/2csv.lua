@@ -1,7 +1,7 @@
 #!/usr/bin/lua
 
 local tools        = require"atools"
-local ilements     = tools.ilements   
+local unpack     = tools.unpack   
 local next_fltr    = tools.next_fltr 
 local pairs_fltr   = tools.pairs_fltr
 
@@ -20,53 +20,28 @@ dataload("plays")
 dataload("stages")
 dataload("news")
 
-local month = {
-    'Январь',
-    'Февраль',
-    'Март',
-    'Апрель',
-    'Май',
-    'Июнь',
-    'Июль',
-    'Август',
-    'Сентябрь',
-    'Октябрь',
-    'Ноябрь',
-    'Декабрь'
-}
-
-local function mnum(mname)
-    for i = 1,#month do
-        if month[i] == mname then return i end
-    end
-end
-
 local out = io.open("../data/shows.csv","w");
 out:write("id,stage,play,date,time\n")
 for i = 1,#shows do
-    local id, month, day, wday, time, playid, stageid = ilements(shows[i])
+    local id, month, day, wday, time, playid, stageid = unpack(shows[i])
     local line = string.format("%d,%s,%s,2015-%d-%d,%s\n",i,playid,stageid,mnum(month),day,time)
     out:write(line)
 end
 
 io.close(out)
 out = io.open("../data/plays.csv","w");
-out:write("id,title,author,descr,age,isalive,premiere,creator\n")
+out:write("id,short,title,author,descr,age,isalive,premiere,creator\n")
 for i = 1,#plays do
-    local playid, playname, about, descr, age, status = ilements(plays[i])
-    local line = string.format("%s,'%s','%s','%s',%s,%d,NULL,NULL\n",playid, playname,about,descr,age, status == 'alive' and 1 or 0)
+    local playid, playname, about, descr, age, status = unpack(plays[i])
+    local line = string.format("%d,%s,'%s','%s','%s',%s,%d,NULL,NULL\n",i,playid, playname,about,descr,age, status == 'alive' and 1 or 0)
     out:write(line)
 end
 
 io.close(out)
 out = io.open("../data/stages.csv","w");
-out:write("id,station,place,addr\n")
+out:write("id,short,station,place,addr\n")
 for i = 1,#stages do
-    local id, station, place, addr = ilements(stages[i])
-    local line = string.format("%s,'%s','%s','%s'\n",id,station,place,addr )
+    local id, station, place, addr = unpack(stages[i])
+    local line = string.format("%d,%s,'%s','%s','%s'\n",i,id,station,place,addr )
     out:write(line)
 end
-
-
-
-

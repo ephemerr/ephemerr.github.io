@@ -9,11 +9,15 @@ local options      = {format = "html5"}
 local engine       = haml.new(options)
 
 local tools        = require "atools"
-local ilements     = tools.ilements   
-local next_fltr    = tools.next_fltr 
+local next_fltr    = tools.next_fltr
 local pairs_fltr   = tools.pairs_fltr
 
 local locals = {}
+
+local drive = require"luasql.mysql"
+local env = assert (drive.mysql())
+local mysql = assert (env:connect("theater","root","123456","localhost",3306 ))
+
 
 --    [1] pagename  [2] title        [3] parent
 local pages =  {
@@ -55,7 +59,9 @@ dataload("plays")
 dataload("stages")
 dataload("news")
 
-
+local function query(name)
+    return io.open("../sql/"..name..".sql","r"):read("*all")
+end
 
 ---- API
 
@@ -82,15 +88,15 @@ locals.map = function()
     local res = {}
     local cur_section = locals.section
     for k,v in pairs(sections) do
-        if k % 2 == 1 then table.insert(res,'\n<div>\n') end 
-        local section,title = ilements(v)
+        if k % 2 == 1 then table.insert(res,'\n<div>\n') end
+        local section,title = unpack(v)
         locals.section = section
         locals.s_file = "/html/"..section..".html"
         locals.s_title = title
         _,page = next_fltr{pages,1,locals.name}
         locals.current = page[3] == section and "current" or ""
         table.insert(res, haml("section"))
-        if k % 2 == 0 then table.insert(res,'\n</div>\n') end 
+        if k % 2 == 0 then table.insert(res,'\n</div>\n') end
     end
     locals.section = cur_section -- restore
     return table.concat(res)
@@ -99,7 +105,7 @@ end
 locals.links = function()
     local res = {}
     for k,v in pairs_fltr(pages, 3, locals.section) do
-        local name, title, section = ilements(v)
+        local name, title, section = unpack(v)
         locals.file = "/html/"..name..".html"
         locals.title = title
         locals.current = locals.name == name and "current" or ""
@@ -124,14 +130,14 @@ end
 locals.topnews = function(max)
     local res = {}
     for i=1,max do
-        locals.date, locals.newshead, locals.newsbody = ilements(news[i])
+        locals.date, locals.newshead, locals.newsbody = unpack(news[i])
         table.insert(res, haml("news"))
     end
     return table.concat(res)
 end
 
 locals.playlabel = function()
-        if locals.status == 'alive' then
+        if locals.status == '1' then
             locals.page =  "/html/playinfo.html#"..locals.playid
             return haml('a')
         else
@@ -142,53 +148,52 @@ end
 locals.places = function()
     res={}
     for i=1,#stages do
-        local stageid, station, place, addr = ilements(stages[i])
-        locals.station = station 
-        locals.place   = place   
-        locals.addr    = addr    
+        local stageid, station, place, addr = unpack(stages[i])
+        locals.station = station
+        locals.place   = place
+        locals.addr    = addr
         locals.stageid = stageid
-        locals.placemap = "/img/stages/"..stageid..".jpg" 
+        locals.placemap = "/img/stages/"..stageid..".jpg"
         table.insert(res, haml("addr"))
     end
     return table.concat(res)
 end
 
-local function show(i)
-        local _, month, day, wday, time, playid, stageid = ilements(shows[i])
-        local _, play  = next_fltr{plays, 1, playid}
-        local _, stage = assert(next_fltr{stages, 1, stageid})
-        local playid, playname, about, _, age, status = ilements(play)
-        local stageid, station, place, addr = ilements(stage)
-        locals.month    =   month
-        locals.day      =   day
-        locals.weektime =   wday..' '..time
-        locals.age      =   age
-        locals.about    =   about
-        locals.playname =   playname
-        locals.station  =   station
-        locals.place    =   place
-        locals.addr     =   addr
-        locals.text     =   playname
-        locals.playid   =   playid
-        locals.status   =   status
-        locals.stage    =   "/html/addr.html#"..stageid
-        return haml("playbill")
+local function playbill(
+        playid, title, author, age, status, 
+        station, place, addr, stageid, 
+        wday, day, month,time)
+    if not title then return nil end
+    local wday      =   tools.wday[wday]
+    locals.month    =   tools.month[month]
+    locals.day      =   day
+    locals.weektime =   wday..' '.. time
+    locals.age      =   age
+    locals.about    =   author
+    locals.playname =   title
+    locals.station  =   station
+    locals.place    =   place
+    locals.addr     =   addr
+    locals.text     =   title
+    locals.playid   =   playid
+    locals.status   =   status
+    locals.stage    =   "/html/addr.html#"..stageid
+    return haml("playbill")
 end
 
 locals.nextshow = function()
-    local i = next_fltr{shows, 1, 0}
-    return show(i)
+    local cursor = assert(mysql:execute(query("nextshow")))
+    return playbill(cursor:fetch())
 end
 
-locals.playbill = function(past, future)
-    local nexti = next_fltr{shows, 1, 0}
-    local from = nexti - past
-    from = from > 0 and from or 1
-    local til  = nexti + future-1
-    til = til < #shows and til or #shows
+locals.playbill = function()
+    local cursor = assert(mysql:execute(query("playbill")))
     local res={}
-    for i = from,til do
-        table.insert(res,show(i))
+    local show = playbill(cursor:fetch())
+    while show do
+        table.insert(res,show)
+        t= {}
+        show = playbill(cursor:fetch())
     end
     return table.concat(res)
 end
@@ -197,7 +202,7 @@ locals.playinfo = function()
     local res = {}
     for i=1,#plays do
         local status
-        locals.playname, locals.title, locals.short, locals.long, locals.age, status  = ilements(plays[i])
+        locals.playname, locals.title, locals.short, locals.long, locals.age, status  = unpack(plays[i])
         if status == 'alive' then
             locals.title = '"' .. locals.title .. '"'
             locals.imgname = "playinfo/"..locals.playname.."/1"
@@ -210,7 +215,7 @@ end
 function genpage(name)
     local _,page = next_fltr{pages,1,name}
     page = page or pages[1]
-    local _, title, section = ilements(page)
+    local _, title, section = unpack(page)
     locals.section = section
     locals.name = name
     local rendered = section == "root" and haml("page") or haml("page2") --MOCK
@@ -219,7 +224,7 @@ end
 
 function genall()
     for k,v in pairs(pages) do
-        local name, title, section = ilements(v)
+        local name, title, section = unpack(v)
         local html_name = name == "main" and "../index.html" or "../html/"..name..".html"
         local p = genpage(name)
         io.open(html_name,"w+"):write(p);
