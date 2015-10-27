@@ -4,9 +4,9 @@ local inspect = require "inspect"
 
 module("gen",package.seeall)
 
-local haml         = require "haml"
+local luahaml         = require "haml"
 local options      = {format = "html5"}
-local engine       = haml.new(options)
+local engine       = luahaml.new(options)
 
 local tools        = require "atools"
 local next_fltr    = tools.next_fltr
@@ -17,7 +17,7 @@ local locals = {}
 local drive = require"luasql.mysql"
 local env = assert (drive.mysql())
 local mysql = assert (env:connect("theater","root","123456","localhost",3306 ))
-
+mysql:execute("SET @@lc_time_names='ru_RU';")
 
 --    [1] pagename  [2] title        [3] parent
 local pages =  {
@@ -48,6 +48,7 @@ local function sqlview(name)
     return "SELECT * FROM "..name..";";
 end
 
+
 ---- API
 
 locals.script = function(scriptname)
@@ -60,6 +61,15 @@ local function haml( el_name )
     return res
 end
 locals.haml = haml
+
+locals.sqlview = function(name)
+    local res={}
+    local cursor = assert(mysql:execute("SELECT * FROM "..name..";"))
+    while cursor:fetch(locals, "a") do
+        table.insert(res, haml(name))
+    end
+    return table.concat(res)
+end
 
 local function img(imgname)
     locals.imgname = imgname
@@ -112,22 +122,20 @@ locals.content = function()
     return res
 end
 
-locals.topnews = function(max)
+locals.newsletter = function()
     local res = {}
-    local cursor = assert(mysql:execute(sqlview("topnews")))
-    for i=1,max do
-        if not cursor:fetch(locals, "a") then break end
-        table.insert(res, haml("news"))
+    local cursor = assert(mysql:execute(sqlview("newsletter")))
+    while cursor:fetch(locals, "a") do 
+        table.insert(res, haml("newsletter"))
     end
     return table.concat(res)
 end
 
-locals.places = function()
+locals.placeinfo= function()
     local res={}
-    local cursor = assert(mysql:execute(sqlview("places")))
+    local cursor = assert(mysql:execute(sqlview("placeinfo")))
     while cursor:fetch(locals, "a") do
-        locals.placemap = "/img/stages/"..locals.stageid..".jpg"
-        table.insert(res, haml("addr"))
+        table.insert(res, haml("placeinfo"))
     end
     return table.concat(res)
 end
@@ -142,8 +150,8 @@ locals.playlabel = function()
 end
 
 local function playbill()
-    locals.month    =   tools.month[locals.month]
-    locals.weektime =   tools.wday[locals.weekday]..' '.. locals.time
+    --locals.month    =   tools.month[locals.month]
+    --locals.weektime =   tools.wday[locals.weekday]..' '.. locals.time
     locals.text     =   locals.title
     locals.stage    =   "/html/addr.html#"..locals.stageid
     return haml("playbill")

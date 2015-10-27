@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS theater;
 CREATE DATABASE theater CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 USE theater;
 
+SET @@lc_time_names='ru_RU';
+
 CREATE TABLE person (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     name CHAR(70) NOT NULL,
@@ -77,10 +79,13 @@ CREATE VIEW playbill AS SELECT
     stage.addr,
     stage.short as stageid,
     `show`.`date`,
-    DATE_FORMAT (`show`.`date`, "%a") as weekday,
-    DATE_FORMAT (`show`.`date`, "%e") as day,
-    DATE_FORMAT (`show`.`date`, "%M") as month,
-    TIME_FORMAT (`show`.`time`, "%k:%i") as time
+    DATE_FORMAT (`date`, "%e") as day,
+    DATE_FORMAT (`date`, "%M") as month,
+    CONCAT(
+        MID(DATE_FORMAT(`date`, "%a"),1,2),
+        " ",
+        TIME_FORMAT (`time`, "%k:%i")
+        ) as weektime
     FROM
       `show`
       JOIN
@@ -89,7 +94,7 @@ CREATE VIEW playbill AS SELECT
 ;
 
 CREATE VIEW nextshow AS SELECT * FROM playbill
-    WHERE playbill.`date` >= CURRENT_DATE()
+    WHERE `date` >= CURRENT_DATE()
     LIMIT 1
 ;
 
@@ -103,16 +108,18 @@ CREATE VIEW playinfo AS SELECT
     WHERE play.isalive = 1
 ; 
 
-CREATE VIEW places AS SELECT
+CREATE VIEW placeinfo AS SELECT
     short as stageid, 
     station, 
     place, 
+    CONCAT("/img/stages/", short,".jpg") as placemap,
     addr
     FROM stage
 ;
 
-CREATE VIEW topnews AS SELECT
+CREATE VIEW newsletter AS SELECT
     DATE_FORMAT (`date`, "%e.%m.%Y") as date,
     text
     FROM news
+    LIMIT 3 
 ;
