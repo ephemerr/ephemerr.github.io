@@ -44,11 +44,6 @@ local sections = {
    { "contact"   , "Контакты"   },
 }
 
-local function sqlview(name)
-    return "SELECT * FROM "..name..";";
-end
-
-
 ---- API
 
 locals.script = function(scriptname)
@@ -62,11 +57,12 @@ local function haml( el_name )
 end
 locals.haml = haml
 
-locals.sqlview = function(name)
+locals.sqlview = function(name,hamlname)
+    local hamlname = hamlname or name
     local res={}
     local cursor = assert(mysql:execute("SELECT * FROM "..name..";"))
     while cursor:fetch(locals, "a") do
-        table.insert(res, haml(name))
+        table.insert(res, haml(hamlname))
     end
     return table.concat(res)
 end
@@ -120,68 +116,6 @@ locals.content = function()
     if not io.open(haml, "r") then return "" end
     local res = engine:render_file(haml, locals)
     return res
-end
-
-locals.newsletter = function()
-    local res = {}
-    local cursor = assert(mysql:execute(sqlview("newsletter")))
-    while cursor:fetch(locals, "a") do 
-        table.insert(res, haml("newsletter"))
-    end
-    return table.concat(res)
-end
-
-locals.placeinfo= function()
-    local res={}
-    local cursor = assert(mysql:execute(sqlview("placeinfo")))
-    while cursor:fetch(locals, "a") do
-        table.insert(res, haml("placeinfo"))
-    end
-    return table.concat(res)
-end
-
-locals.playlabel = function()
-        if locals.isalive == '1' then
-            locals.page =  "/html/playinfo.html#"..locals.playid
-            return haml('a')
-        else
-            return locals.text
-        end
-end
-
-local function playbill()
-    --locals.month    =   tools.month[locals.month]
-    --locals.weektime =   tools.wday[locals.weekday]..' '.. locals.time
-    locals.text     =   locals.title
-    locals.stage    =   "/html/addr.html#"..locals.stageid
-    return haml("playbill")
-end
-
-locals.nextshow = function()
-    local cursor = assert(mysql:execute(sqlview("nextshow")))
-    if cursor:fetch(locals, "a") then
-        return playbill()
-    end
-end
-
-locals.playbill = function()
-    local cursor = assert(mysql:execute(sqlview("playbill")))
-    local res={}
-    while cursor:fetch(locals, "a") do
-        table.insert(res,playbill())
-    end
-    return table.concat(res)
-end
-
-locals.playinfo = function()
-    local cursor = assert(mysql:execute(sqlview("playinfo")))
-    local res = {}
-    while cursor:fetch(locals, "a") do
-        locals.label = '"' .. locals.label .. '"'
-        locals.imgname = "playinfo/"..locals.short .."/1"
-        table.insert(res, haml("playinfo"))
-    end
-    return table.concat(res)
 end
 
 function genpage(name)

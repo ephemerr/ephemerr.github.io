@@ -69,22 +69,24 @@ FIELDS OPTIONALLY ENCLOSED BY '\'' TERMINATED BY ','
 LINES TERMINATED BY '\n' IGNORE 1 LINES;
 
 CREATE VIEW playbill AS SELECT
-    play.short as playid,
     play.title,
     play.author,
     play.age,
-    play.isalive,
+    IF (play.isalive = '1', 
+        CONCAT("/html/playinfo.html#",play.short),
+        ""
+    ) as playlink,
     stage.station,
     stage.place,
     stage.addr,
-    stage.short as stageid,
+    CONCAT("/html/addr.html#",stage.short) as stage,
     `show`.`date`,
     DATE_FORMAT (`date`, "%e") as day,
     DATE_FORMAT (`date`, "%M") as month,
     CONCAT(
         MID(DATE_FORMAT(`date`, "%a"),1,2),
         " ",
-        TIME_FORMAT (`time`, "%k:%i")
+        TIME_FORMAT(`time`, "%k:%i")
         ) as weektime
     FROM
       `show`
@@ -99,11 +101,12 @@ CREATE VIEW nextshow AS SELECT * FROM playbill
 ;
 
 CREATE VIEW playinfo AS SELECT
-    play.short,
-    play.title as label,
-    play.author,
-    play.descr,
-    play.age
+    short,
+    title as label,
+    author,
+    descr,
+    CONCAT("playinfo/",short,"/1") as imgname,
+    age
     FROM play 
     WHERE play.isalive = 1
 ; 

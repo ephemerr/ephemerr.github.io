@@ -6,7 +6,8 @@
   .title_col
     .age= age
     .about= author
-    .playname= playlabel()
+    .playname
+      %a(href=playlink)= title
   .place_col
     %a(href=stage)
       .station= station
