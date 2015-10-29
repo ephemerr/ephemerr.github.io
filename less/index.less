@@ -138,6 +138,9 @@ html {
                 color: @hoverlink-color;//@color-main-condensed;
             }
         }
+        a[href=''] {
+            pointer-events: none;
+        }
         a.more {
             float: right;
             font-size: @font-size -1px;
@@ -148,7 +151,7 @@ html {
                 vertical-align: center;
                 padding: 0em .5em 0em .5em;
                 //border-left: 5px solid #FFD7DD;//LightPink;
-                background: linear-gradient(to left, white, #FFE9EC);
+                //background: linear-gradient(to left, white, Mocasin);
                 font-size: 110%;
                 a.current {
                     color: @color-b-condensed;
