@@ -79,7 +79,10 @@ CREATE VIEW allplays AS SELECT
     stage.station,
     stage.place,
     stage.addr,
-    CONCAT("/html/addr.html#",stage.short) as stage,
+    IF (stage.id <= 2, 
+        CONCAT("/html/addr.html#",stage.short),
+        ""
+    ) as stage,
     `show`.`date`,
     DATE_FORMAT (`date`, "%e") as day,
     DATE_FORMAT (`date`, "%M") as month,
