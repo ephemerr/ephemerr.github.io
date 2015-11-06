@@ -68,7 +68,7 @@ INTO TABLE `news`
 FIELDS OPTIONALLY ENCLOSED BY '\'' TERMINATED BY ','
 LINES TERMINATED BY '\n' IGNORE 1 LINES;
 
-CREATE VIEW playbill AS SELECT
+CREATE VIEW allplays AS SELECT
     play.title,
     play.author,
     play.age,
@@ -92,10 +92,16 @@ CREATE VIEW playbill AS SELECT
       `show`
       JOIN
           (play,stage)
-          ON (`show`.stage = stage.short  AND  `show`.play = play.short)
+          ON  `show`.stage = stage.short  
+          AND `show`.play = play.short
+          AND YEAR(`show`.`date`) >= YEAR ( CURRENT_DATE() )
 ;
 
-CREATE VIEW nextshow AS SELECT * FROM playbill
+CREATE VIEW playbill AS SELECT * FROM allplays 
+    WHERE `date` >=  DATE_SUB(CURRENT_DATE(), INTERVAL 21 DAY) 
+;
+
+CREATE VIEW nextshow AS SELECT * FROM allplays 
     WHERE `date` >= CURRENT_DATE()
     LIMIT 1
 ;
@@ -118,6 +124,7 @@ CREATE VIEW placeinfo AS SELECT
     CONCAT("/img/stages/", short,".jpg") as placemap,
     addr
     FROM stage
+    LIMIT 2
 ;
 
 CREATE VIEW newsletter AS SELECT
